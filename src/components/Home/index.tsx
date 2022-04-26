@@ -1,4 +1,10 @@
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Card from '@mui/material/Card';
+import CardActions from '@mui/material/CardActions';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 
 function Home() {
     
@@ -27,35 +33,47 @@ function Home() {
     requestHeaders.set('apiKey', apiKey);
 
     async function getHomeInfo() {
-        let response = await fetch(metroHeroMetrics, {
-            headers:  requestHeaders
-        });
+        try {
+            let response = await fetch(metroHeroMetrics, {
+                headers:  requestHeaders
+            });
 
-        let lineData = await response.json();
-
-        console.log(lineData.lineMetricsByLine);
-
-        let lineArray  = []
-
-        for(let [key, value] of Object.entries(lineData.lineMetricsByLine)) {
-
-            let lineArrayEntry = {
-                lineCode : value.lineCode,
-                maximumTrainDelay : value.maximumTrainDelay,
-                averageTrainFrequency : value.averageTrainFrequency,
-                expectedTrainFrequency : value.expectedTrainFrequency,
-                averagePlatformWaitTime : value.averagePlatformWaitTime,
-                platformWaitTimeTrendStatus : value.platformWaitTimeTrendStatus,
-                numTrains : value.numTrains,
-                trainFrequencyStatus : value.trainFrequencyStatus
+            if(!response.ok) {
+                throw new Error('API failure');
             }
 
-            lineArray.push(lineArrayEntry);
+            let lineData = await response.json();
+
+            console.log(lineData.lineMetricsByLine);
+
+            let lineArray  = [];
+            
+
+            for(let [key, value] of Object.entries(lineData.lineMetricsByLine)) {
+
+                console.log(typeof(value))
+
+                let lineArrayEntry = {
+                    lineCode : value.lineCode,
+                    maximumTrainDelay : value.maximumTrainDelay,
+                    averageTrainFrequency : value.averageTrainFrequency,
+                    expectedTrainFrequency : value.expectedTrainFrequency,
+                    averagePlatformWaitTime : value.averagePlatformWaitTime,
+                    platformWaitTimeTrendStatus : value.platformWaitTimeTrendStatus,
+                    numTrains : value.numTrains,
+                    trainFrequencyStatus : value.trainFrequencyStatus
+                }
+
+                lineArray.push(lineArrayEntry);
+            }
+
+            console.log(lineArray)
+
+            setMetroLineData(lineArray);
+
+        }  catch (err) {
+            console.log(err)
         }
-
-        console.log(lineArray)
-
-        setMetroLineData(lineArray);
     }
 
     useEffect(() => {
@@ -68,12 +86,39 @@ function Home() {
         <>
         {
             metroLineData.length ? (
-                
-                <div>
+                    <>
                     {metroLineData.map(line => (
-                        <div>{line.lineCode}</div>
+                        <>
+                        <Card variant = 'outlined'>
+                            <>
+                            <CardContent>
+                                <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
+                                {line.lineCode}
+                                </Typography>
+                                <Typography variant="h5" component="div">
+                                    Max delay: {line.maximumTrainDelay} <br/>
+
+                                    Average train frequency: {line.averageTrainFrequency.toFixed(2)}<br/>
+
+                                    Expected train frequency: {line.expectedTrainFrequency.toFixed(2)}<br/>
+
+                                    Average wait time: {line.averagePlatformWaitTime.toFixed(2)}<br/>
+
+                                    Time trend: {line.platformWaitTimeTrendStatus}<br/>
+                                    
+                                    Trains on line: {line.numTrains}<br/>
+                                    Line status: {line.trainFrequencyStatus}
+                                    </Typography>
+                                </CardContent>
+                            <CardActions>
+                                <Button size="small"><Link to={line.lineCode}>Go to Line</Link></Button>
+                            </CardActions>
+                            </>
+                        </Card>
+                        </>
                     ))}
-                </div>
+                    </>
+                
                 
             ) : 
             (
