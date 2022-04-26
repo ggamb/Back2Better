@@ -61,7 +61,7 @@ function Nav() {
     <header className="flex-row">
       <h1>
         <Link to="/">
-          <span role="img" aria-label="Back2Better Logo"></span>
+          <span role="img" aria-label="Back2Better Logo - metro emoji">🚇</span>
         </Link>
       </h1>
 

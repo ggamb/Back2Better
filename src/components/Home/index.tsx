@@ -19,7 +19,7 @@ function Home() {
         trainFrequencyStatus: string;
     }
 
-    let [metroLineData, setMetroLineData] = useState([]);
+    let [metroLineData, setMetroLineData] = useState<LineInfo[]>([]);
 
     const apiKey = process.env.REACT_APP_METROHERO;
     
@@ -34,7 +34,7 @@ function Home() {
 
     async function getHomeInfo() {
         try {
-            let response = await fetch(metroHeroMetrics, {
+            let response : any = await fetch(metroHeroMetrics, {
                 headers:  requestHeaders
             });
 
@@ -42,27 +42,15 @@ function Home() {
                 throw new Error('API failure');
             }
 
-            let lineData = await response.json();
+            let lineDataComplete : any = await response.json();
 
-            console.log(lineData.lineMetricsByLine);
+            let lineData : any = lineDataComplete.lineMetricsByLine;
 
-            let lineArray  = [];
-            
+            let lineArray = [];          
 
-            for(let [key, value] of Object.entries(lineData.lineMetricsByLine)) {
+            for(let [key, value] of Object.entries(lineData)) {
 
-                console.log(typeof(value))
-
-                let lineArrayEntry = {
-                    lineCode : value.lineCode,
-                    maximumTrainDelay : value.maximumTrainDelay,
-                    averageTrainFrequency : value.averageTrainFrequency,
-                    expectedTrainFrequency : value.expectedTrainFrequency,
-                    averagePlatformWaitTime : value.averagePlatformWaitTime,
-                    platformWaitTimeTrendStatus : value.platformWaitTimeTrendStatus,
-                    numTrains : value.numTrains,
-                    trainFrequencyStatus : value.trainFrequencyStatus
-                }
+                let lineArrayEntry : any = value;
 
                 lineArray.push(lineArrayEntry);
             }
@@ -74,6 +62,22 @@ function Home() {
         }  catch (err) {
             console.log(err)
         }
+    }
+
+    const toMinutes = (time : number) => {   
+        // Hours, minutes and seconds
+        var hrs = ~~(time / 3600);
+        var mins = ~~((time % 3600) / 60);
+        var secs = ~~time % 60;
+    
+        // Output like "1:01" or "4:03:59" or "123:03:59"
+        var ret = "";
+        if (hrs > 0) {
+            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
+        }
+        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
+        ret += "" + secs;
+        return ret;
     }
 
     useEffect(() => {
@@ -96,18 +100,13 @@ function Home() {
                                 {line.lineCode}
                                 </Typography>
                                 <Typography variant="h5" component="div">
-                                    Max delay: {line.maximumTrainDelay} <br/>
-
-                                    Average train frequency: {line.averageTrainFrequency.toFixed(2)}<br/>
-
-                                    Expected train frequency: {line.expectedTrainFrequency.toFixed(2)}<br/>
-
-                                    Average wait time: {line.averagePlatformWaitTime.toFixed(2)}<br/>
-
+                                    Line status: {line.trainFrequencyStatus}<br/>
+                                    Average train frequency: {line.averageTrainFrequency.toFixed(2)} minutes<br/>
+                                    Expected train frequency: {line.expectedTrainFrequency.toFixed(2)} minutes<br/>
+                                    Average wait time: {line.averagePlatformWaitTime.toFixed(2)} minutes<br/>
+                                    Max delay: {toMinutes(line.maximumTrainDelay)} <br/>
                                     Time trend: {line.platformWaitTimeTrendStatus}<br/>
-                                    
                                     Trains on line: {line.numTrains}<br/>
-                                    Line status: {line.trainFrequencyStatus}
                                     </Typography>
                                 </CardContent>
                             <CardActions>
