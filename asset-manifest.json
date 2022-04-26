@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Back2BetterReact/static/css/main.231e3dec.css",
+    "main.js": "/Back2BetterReact/static/js/main.69f96a41.js",
+    "static/js/787.385eb0f9.chunk.js": "/Back2BetterReact/static/js/787.385eb0f9.chunk.js",
+    "index.html": "/Back2BetterReact/index.html",
+    "main.231e3dec.css.map": "/Back2BetterReact/static/css/main.231e3dec.css.map",
+    "main.69f96a41.js.map": "/Back2BetterReact/static/js/main.69f96a41.js.map",
+    "787.385eb0f9.chunk.js.map": "/Back2BetterReact/static/js/787.385eb0f9.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.231e3dec.css",
+    "static/js/main.69f96a41.js"
+  ]
+}
