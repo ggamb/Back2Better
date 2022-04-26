@@ -110,7 +110,7 @@ function Home() {
                                     </Typography>
                                 </CardContent>
                             <CardActions>
-                                <Button size="small"><Link to={line.lineCode}>Go to Line</Link></Button>
+                                <Button size="small"><Link to={line.lineCode}>Go to live {line.lineCode} Line</Link></Button>
                             </CardActions>
                             </>
                         </Card>
