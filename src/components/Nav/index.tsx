@@ -11,9 +11,6 @@ import Home from '../Home';
 
 function Nav() {
   const stationsList = [
-    { name: '', 
-      display: 'Home'
-    },
     {
       name: 'red',
       display: 'Red'
@@ -43,28 +40,26 @@ function Nav() {
 
   function showNavigation()  {
       return (
-        <div >
-          <ul className="flex-row">
-            {stationsList.map(station => (
-              <li key = {station.name} className = "nav-list">
-                <Link to={`/${station.name}`} >
-                  {station.display}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
+        <ul className="flex-row">
+        <h1>
+          <Link to="/">
+            <span role="img" aria-label="Back2Better Logo - metro car emoji">🚇Back2Better</span>
+          </Link>
+        </h1>
+          {stationsList.map(station => (
+            <li key = {station.name} className = "nav-list">
+              <Link to={`/${station.name}`} >
+                {station.display}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
       );
   }
 
   return (
     <header className="flex-row">
-      <h1>
-        <Link to="/">
-          <span role="img" aria-label="Back2Better Logo - metro emoji">🚇</span>
-        </Link>
-      </h1>
-
       <nav>
         {showNavigation()}
       </nav>

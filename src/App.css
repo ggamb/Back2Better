@@ -28,18 +28,9 @@
   color: #61dafb;
 }
 
-.flex-row {
-  display: flex;
-  justify-content: space-around;
-}
 
-nav {
-  width: 100%
-}
 
-ul {
-  list-style-type: none;
-}
+
 
 @keyframes App-logo-spin {
   from {

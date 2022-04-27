@@ -11,3 +11,69 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+
+h1 a, li a {
+  text-decoration: none;
+  color: inherit;
+}
+
+nav {
+  width: 100%;
+}
+
+ul {
+  list-style-type: none;
+}
+
+
+.flex-row {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.card-style {
+  background-color: black;
+}
+
+.card-spacing {
+  margin: 10px;
+}
+
+.RD {
+  color: red;
+}
+
+.BL {
+  color: blue;
+}
+
+.YL {
+  color: yellow;
+}
+
+.OR {
+  color: orange;
+}
+
+.SV {
+  color: silver;
+}
+
+.GR {
+  color: green;
+}
+
+.vertical-red {
+  border-left: 20px solid black;
+  position: absolute;
+  left: 50%;
+  border-bottom: 25px;
+  border-color: red;
+  height: 100%;
+}
+
+.station-list-red {
+  text-align: right;
+  margin-right: 15%;
+}

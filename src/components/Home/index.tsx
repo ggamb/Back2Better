@@ -82,7 +82,7 @@ function Home() {
 
     useEffect(() => {
         getHomeInfo();
-    }, [])
+    }, []);
 
 
 
@@ -93,27 +93,55 @@ function Home() {
                     <>
                     {metroLineData.map(line => (
                         <>
-                        <Card variant = 'outlined'>
-                            <>
-                            <CardContent>
-                                <Typography sx={{ fontSize: 30 }} color="text.secondary" gutterBottom>
-                                {line.lineCode}
-                                </Typography>
-                                <Typography variant="h5" component="div">
-                                    Line status: {line.trainFrequencyStatus}<br/>
-                                    Average train frequency: {line.averageTrainFrequency.toFixed(2)} minutes<br/>
-                                    Expected train frequency: {line.expectedTrainFrequency.toFixed(2)} minutes<br/>
-                                    Average wait time: {line.averagePlatformWaitTime.toFixed(2)} minutes<br/>
-                                    Max delay: {toMinutes(line.maximumTrainDelay)} <br/>
-                                    Time trend: {line.platformWaitTimeTrendStatus}<br/>
-                                    Trains on line: {line.numTrains}<br/>
-                                    </Typography>
-                                </CardContent>
-                            <CardActions>
-                                <Button size="small"><Link to={line.lineCode}>Go to live {line.lineCode} Line</Link></Button>
-                            </CardActions>
-                            </>
-                        </Card>
+                        <div className="flex-row card-spacing">
+                            <Card variant = 'outlined' sx = {{backgroundColor : 'wheat'}}>
+                                <>
+                                <CardContent>
+                                        <Typography sx={{ fontSize: 30 }} className = {line.lineCode} gutterBottom>
+                                            {line.lineCode}
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Line status: 
+                                            {(line.trainFrequencyStatus) == 'OK' ? 
+                                                ( <span> {line.trainFrequencyStatus} 😊</span>) 
+                                                : 
+                                                (<span> {line.trainFrequencyStatus} 😡</span>)
+                                            }
+                                            <br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Average wait time: {line.averagePlatformWaitTime.toFixed(2)} minutes<br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Expected train frequency: {line.expectedTrainFrequency.toFixed(2)} minutes<br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Average train frequency: {line.averageTrainFrequency.toFixed(2)} minutes<br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Max train delay: {toMinutes(line.maximumTrainDelay)} <br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Time trend:  
+                                            {(line.platformWaitTimeTrendStatus === 'NEUTRAL') ? (
+                                                <span> Neutral 😑</span>
+                                            ) : (line.platformWaitTimeTrendStatus === 'INCREASING') ? (
+                                                <span> Increasing 😡</span>
+                                            ) : 
+                                                <span> Decreasing 😀</span>
+                                            }
+                                            <br/>
+                                        </Typography>
+                                        <Typography variant="h5" component="div">
+                                            Trains on {line.lineCode} line: {line.numTrains}<br/>
+                                        </Typography>
+                                    </CardContent>
+                                <CardActions>
+                                    <Button href={line.lineCode} variant="contained" size="small" sx = {{margin: '0 auto'}} disableElevation>Go to live {line.lineCode} Line</Button>
+                                </CardActions>
+                                </>
+                            </Card>
+                        </div>
                         </>
                     ))}
                     </>
