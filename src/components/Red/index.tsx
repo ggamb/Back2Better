@@ -77,29 +77,45 @@ function Red() {
 
     return (
         <>
-        <div className="northBound"></div>
+        <div className="scrollable-container">
+            <div className="inner-line-container">
+                <div className="line-and-station-container">
+                    <div className="vertical-red"></div>
+                    <div className="line-and-station-content">
+                            {redLineStations.map(station => (
+                                <div className="station-row">
+                                    <div className="station-dot"></div>
+                                    <div className="station-name">{station.name}</div>
+                                </div>
+                            ))}
+                        
+                    </div>
+
+                </div>    
+            </div>
+        </div>
+
+        {/*<div className="northBound"></div>
         
         <div className= "vertical-red">
 
         </div>
         <div className="southBound"></div>
-        <div className="station-list-red">
+        <div>
             <ul>
                 {redLineStations.map(station => (
-                    <p>{station.name}</p>
+                    <p className="station-list-red">{station.name}</p>
                 ))
-                
-                
-                /*<li class="station-name">
+                <li class="station-name">
                     <p>{{station.name}}</p>
                     <div *ngIf="station.transferLines.includes('green')">🟢</div>
                     <div *ngIf="station.transferLines.includes('yellow')">🟡</div>
                     <div *ngIf="station.transferLines.includes('orange')">🟠</div>
                     <div *ngIf="station.transferLines.includes('silver')">⚪</div>
                     <div *ngIf="station.transferLines.includes('blue')">🔵</div>
-                </li>*/}
+                </li>
             </ul>
-        </div>
+        </div>*/}
         </>
     )
 }
