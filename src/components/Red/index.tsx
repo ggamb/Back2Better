@@ -32,7 +32,7 @@ function Red() {
         {line: 'red', name: 'Takoma', transfer: false, transferLines: ''},
         {line: 'red', name: 'Fort Totten', transfer: false, transferLines: 'red green yellow'},
         {line: 'red', name: 'Brookland-CUA', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Rhode Island Ave', transfer: false, transferLines: ''},
+        {line: 'red', name: 'Rhode Island Avenue-Brentwood', transfer: false, transferLines: ''},
         {line: 'red', name: 'NoMa-Gallaudet U', transfer: false, transferLines: ''},
         {line: 'red', name: 'Union Station', transfer: false, transferLines: ''},
         {line: 'red', name: 'Judiciary Square', transfer: false, transferLines: ''},
@@ -81,15 +81,18 @@ function Red() {
 
             let redLineTrains : any = await response.json();
 
-            let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1)
-            let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2)
-            let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow)
-            let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow)
+            let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && !lines.isCurrentlyHoldingOrSlow);
+            let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && !lines.isCurrentlyHoldingOrSlow);
+            let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
+            let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
+
+            console.log(redLineNorth)
 
             setNorthBoundTrains(redLineNorth);
             setSouthBoundTrains(redLineSouth);
             setNorthBoundTrainsAtStation(redLineNorthAtStation);
             setSouthBoundTrainsAtStation(redLineSouthAtStation);
+
         }  catch (err) {
             console.log(err)
         }
@@ -147,35 +150,40 @@ function Red() {
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
-                                    {southBoundTrains.length ? (
-                                        <>
-                                            {
-                                                
-
-                                            }
-                                        </>
-                                    ) : 
-
-                                    (
-                                        <div>test Loading</div>
-                                    )
+                                    {southBoundTrains.length ?
+                                        (
+                                            <>                                          
+                                                {
+                                                    southBoundTrains.map(southTrains => {
+                                                        if(southTrains.currentStationName === station.name) 
+                                                        return <div key={southTrains.currentStationName} className="train-in-transit">🚇↓</div>
+                                                    })
+                                                }
+                                            </>
+                                        ) : 
+                                        (
+                                            <div>Loading</div>
+                                        )
                                     }
                                 </div>
-                                <div className="between-station on-right">
-                                    {northBoundTrains.length ? (
-                                        <>
-                                            {
-                                                <div>test</div>
+                                <div className="between-station on-right">                                   
 
-                                                
-                                            }
-                                        </>
-                                    ) : 
-
-                                    (
-                                        <div>test Loading</div>
-                                    )
+                                    {northBoundTrains.length ?
+                                        (
+                                            <>                                          
+                                                {
+                                                    northBoundTrains.map(northTrains => {
+                                                        if(northTrains.currentStationName === station.name) 
+                                                        return <div key={northTrains.currentStationName} className="train-in-transit">🚇↑</div>
+                                                    })
+                                                }
+                                            </>
+                                        ) : 
+                                        (
+                                            <div>Loading</div>
+                                        )
                                     }
+                            
                                 </div>
                                 </>
                             ))}
