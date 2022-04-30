@@ -18,10 +18,11 @@ function Red() {
         currentStationCode: string;
         currentStationName: string;
         directionNumber: number;
-        maxMinutesAway: number;
+        minutesAway: number;
         tripId: string;
         trainId: string;
         isCurrentlyHoldingOrSlow: boolean;
+        Min: string;
     }
     
     const redLineStations : Array<Station> = [ 
@@ -81,12 +82,14 @@ function Red() {
 
             let redLineTrains : any = await response.json();
 
+            let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+
             let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && !lines.isCurrentlyHoldingOrSlow);
             let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && !lines.isCurrentlyHoldingOrSlow);
             let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
             let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
 
-            console.log(redLineNorth)
+            console.log('all RD', redLineConsole)
 
             setNorthBoundTrains(redLineNorth);
             setSouthBoundTrains(redLineSouth);
@@ -100,8 +103,14 @@ function Red() {
 
     useEffect(() => {
         getRedLineTrains();
-    }, []);
 
+        /*const interval=setInterval(()=>{
+            getRedLineTrains()
+        },10000)
+
+        return()=>clearInterval(interval)*/
+
+    }, []);
     
 
     return (
@@ -121,29 +130,37 @@ function Red() {
                                                     {
                                                         southBoundTrainsAtStation.map(southTrains => {
                                                             if(southTrains.currentStationName === station.name) 
-                                                            return <div key={southTrains.currentStationName} className="train-at-station">🚇↓</div>
+                                                            return ( 
+                                                                <div className="train-icon-container">
+                                                                    <div className="train-info-left">
+                                                                        <p className="train-category">{southTrains.Min}</p>
+                                                                        <p>{southTrains.Car}-car train</p>
+                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
+                                                                    </div>
+                                                                    <div key={southTrains.trainId} className="train-at-station">🚇↓</div>
+                                                                </div>
+                                                            )
                                                         })
                                                     }
                                                 </>
                                             ) : 
                                             (
-                                                <div>Loading</div>
+                                                <></>
                                             )
                                         }
-
                                         {northBoundTrainsAtStation.length ?
                                             (
                                                 <>                                          
                                                     {
                                                         northBoundTrainsAtStation.map(northTrains => {
                                                             if(northTrains.currentStationName === station.name) 
-                                                            return <div key={northTrains.currentStationName} className="train-at-station-right">🚇↑</div>
+                                                            return <div key={northTrains.trainId} className="train-at-station-right">🚇↑</div>
                                                         })
                                                     }
                                                 </>
                                             ) : 
                                             (
-                                                <div>Loading</div>
+                                                <></>
                                             )
                                         }
                                     <div className="station-name">{station.name}</div>
@@ -155,14 +172,41 @@ function Red() {
                                             <>                                          
                                                 {
                                                     southBoundTrains.map(southTrains => {
-                                                        if(southTrains.currentStationName === station.name) 
-                                                        return <div key={southTrains.currentStationName} className="train-in-transit">🚇↓</div>
+                                                        if(southTrains.previousStationName === station.name) 
+                                                        return( 
+                                                            <>
+                                                                <div className="train-icon-container">
+                                                                    <div className="train-info-left">
+                                                                        {southTrains.Min === 'ARR' || southTrains.Min === 'BRD' ? (
+                                                                                <p className="train-category">{southTrains.Min}</p>
+                                                                            ) : (
+                                                                                <p className="train-category">{southTrains.Min} min</p>
+                                                                            )
+                                                                        }
+                                                                        <p>{southTrains.Car}-car train</p>
+                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
+                                                                    </div>
+                                                                    <div key={southTrains.trainId} className="train-in-transit-left">🚇↓</div>
+                                                                </div>
+                                                            </>
+                                                        )
+                                                    
+
+                                                        {/*                                                               
+                                                         <div className="train-icon-container">
+                                                                    <div className="train-info-left">
+                                                                        <p className="train-category">{southTrains.Min}</p>
+                                                                        <p>{southTrains.Car}-car train</p>
+                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
+                                                                    </div>
+                                                                    <div key={southTrains.trainId} className="train-at-station">🚇↓</div>
+                                                                </div> */}
                                                     })
                                                 }
                                             </>
                                         ) : 
                                         (
-                                            <div>Loading</div>
+                                            <></>
                                         )
                                     }
                                 </div>
@@ -174,22 +218,19 @@ function Red() {
                                                 {
                                                     northBoundTrains.map(northTrains => {
                                                         if(northTrains.currentStationName === station.name) 
-                                                        return <div key={northTrains.currentStationName} className="train-in-transit">🚇↑</div>
+                                                        return <div key={northTrains.trainId} className="">🚇↑</div>
                                                     })
                                                 }
                                             </>
                                         ) : 
                                         (
-                                            <div>Loading</div>
+                                            <></>
                                         )
                                     }
-                            
                                 </div>
                                 </>
                             ))}
-                        
                     </div>
-
                 </div>    
             </div>
         </div>

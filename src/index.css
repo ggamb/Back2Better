@@ -89,7 +89,7 @@ ul {
   margin-bottom: 20px;
   padding-bottom: 20px;
   position: relative;
-  width: 350px;
+  width: 400px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -134,12 +134,13 @@ ul {
 
 .station-name {
   text-align: right;
+  max-width: 110px;
+  float: right;
 }
 
 .between-station {
   position: relative;
   display: table-cell;
-  vertical-align: middle;
 }
 
 .on-left {
@@ -155,13 +156,51 @@ ul {
 
 .train-at-station {
   position: absolute;
+  margin-left: 45px;
 }
+
 .train-at-station-right {
   position: absolute;
-  left: 125px
+  left: 110px
 }
 
 .train-in-transit {
   width: 80px;
   left: 30px;
+}
+
+
+.train-icon-container {
+  position: absolute;
+  width: 75px;
+  z-index: 3;
+  cursor: pointer;
+  display: flex;
+  align-content: baseline;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  align-items: center;
+}
+
+.train-info-left {
+  display: inline-block;
+  font-size: 9px;
+  line-height: 9px;
+}
+
+.train-mins {
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
+}
+
+.train-Id {
+  color: rgba(0, 0, 0, 0.87);
+}
+
+.train-category {
+  font-size: 13px;
+  line-height: 13px;
+  font-weight: 500;
 }
