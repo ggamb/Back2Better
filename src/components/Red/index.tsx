@@ -8,6 +8,21 @@ function Red() {
         transfer: boolean;
         transferLines: string;
     }
+
+    interface RedTrains {
+        Car: string;
+        DestinationName: string;
+        LocationCode: string;
+        PreviousStationCode: string;
+        previousStationName: string;
+        currentStationCode: string;
+        currentStationName: string;
+        directionNumber: number;
+        maxMinutesAway: number;
+        tripId: string;
+        trainId: string;
+        isCurrentlyHoldingOrSlow: boolean;
+    }
     
     const redLineStations : Array<Station> = [ 
         {line: 'red', name: 'Glenmont', transfer: false, transferLines: ''},
@@ -37,7 +52,13 @@ function Red() {
         {line: 'red', name: 'Twinbrook', transfer: false, transferLines: ''},
         {line: 'red', name: 'Rockville', transfer: false, transferLines: ''},
         {line: 'red', name: 'Shady Grove', transfer: false, transferLines: ''},
-    ]
+    ];
+
+
+    const [northBoundTrainsAtStation, setNorthBoundTrainsAtStation] = useState<RedTrains[]>([]);
+    const [southBoundTrainsAtStation, setSouthBoundTrainsAtStation] = useState<RedTrains[]>([]);
+    const [northBoundTrains, setNorthBoundTrains] = useState<RedTrains[]>([]);
+    const [southBoundTrains, setSouthBoundTrains] = useState<RedTrains[]>([]);
 
     const apiKey = process.env.REACT_APP_METROHERO;
     const metroHeroRedTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
@@ -60,10 +81,15 @@ function Red() {
 
             let redLineTrains : any = await response.json();
 
-            let redLineOnly : any = redLineTrains.filter((lines : any) => lines.Line === 'RD')
+            let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1)
+            let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2)
+            let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow)
+            let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow)
 
-            console.log(redLineOnly)
-
+            setNorthBoundTrains(redLineNorth);
+            setSouthBoundTrains(redLineSouth);
+            setNorthBoundTrainsAtStation(redLineNorthAtStation);
+            setSouthBoundTrainsAtStation(redLineSouthAtStation);
         }  catch (err) {
             console.log(err)
         }
@@ -83,10 +109,75 @@ function Red() {
                     <div className="vertical-red"></div>
                     <div className="line-and-station-content">
                             {redLineStations.map(station => (
+                                <>
                                 <div className="station-row">
                                     <div className="station-dot"></div>
+                                        {southBoundTrainsAtStation.length ?
+                                            (
+                                                <>                                          
+                                                    {
+                                                        southBoundTrainsAtStation.map(southTrains => {
+                                                            if(southTrains.currentStationName === station.name) 
+                                                            return <div key={southTrains.currentStationName} className="train-at-station">🚇↓</div>
+                                                        })
+                                                    }
+                                                </>
+                                            ) : 
+                                            (
+                                                <div>Loading</div>
+                                            )
+                                        }
+
+                                        {northBoundTrainsAtStation.length ?
+                                            (
+                                                <>                                          
+                                                    {
+                                                        northBoundTrainsAtStation.map(northTrains => {
+                                                            if(northTrains.currentStationName === station.name) 
+                                                            return <div key={northTrains.currentStationName} className="train-at-station-right">🚇↑</div>
+                                                        })
+                                                    }
+                                                </>
+                                            ) : 
+                                            (
+                                                <div>Loading</div>
+                                            )
+                                        }
                                     <div className="station-name">{station.name}</div>
+                                    <div className="station-problems"></div>
                                 </div>
+                                <div className="between-station on-left">
+                                    {southBoundTrains.length ? (
+                                        <>
+                                            {
+                                                
+
+                                            }
+                                        </>
+                                    ) : 
+
+                                    (
+                                        <div>test Loading</div>
+                                    )
+                                    }
+                                </div>
+                                <div className="between-station on-right">
+                                    {northBoundTrains.length ? (
+                                        <>
+                                            {
+                                                <div>test</div>
+
+                                                
+                                            }
+                                        </>
+                                    ) : 
+
+                                    (
+                                        <div>test Loading</div>
+                                    )
+                                    }
+                                </div>
+                                </>
                             ))}
                         
                     </div>

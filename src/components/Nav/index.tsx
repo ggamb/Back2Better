@@ -1,12 +1,5 @@
-import React from "react";
+
 import { Link } from "react-router-dom";
-import Green from '../Green';
-import Yellow from '../Yellow';
-import Red from '../Red';
-import Blue from '../Blue';
-import Orange from '../Orange';
-import Silver from '../Silver';
-import Home from '../Home';
 
 
 function Nav() {

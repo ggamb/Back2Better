@@ -112,7 +112,6 @@ ul {
 .station-row {
   position: relative;
   height: 24px;
-  margin-bottom: 60px;
 }
 
 .station-dot {
@@ -135,4 +134,29 @@ ul {
 
 .station-name {
   text-align: right;
+}
+
+.between-station {
+  position: relative;
+  display: table-cell;
+  vertical-align: middle;
+}
+
+.on-left {
+  height: 175px;
+  width: 80px;
+}
+
+.on-right{
+  height: 175px;
+  width: 80px;
+  left: 25px;
+}
+
+.train-at-station {
+  position: absolute;
+}
+.train-at-station-right {
+  position: absolute;
+  left: 110px
 }
