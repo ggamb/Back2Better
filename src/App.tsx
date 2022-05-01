@@ -32,6 +32,8 @@ function App() {
       {path : '/BL', element : <Blue/> },
       {path : '/orange', element : <Orange/> },
       {path : '/OR', element : <Orange/> },
+      {path : '/silver', element : <Silver/> },
+      {path : '/SV', element : <Silver/> },
       ]);
 
       return routes;

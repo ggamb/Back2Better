@@ -33,9 +33,9 @@ function Green() {
         {line: 'green yellow', name: 'Fort Totten', transfer: false, transferLines: 'yellow green green'},
         {line: 'green yellow', name: 'Georgia Avenue-Petworth', transfer: false, transferLines: ''},
         {line: 'green yellow', name: 'Columbia Heights', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'U St', transfer: false, transferLines: ''},
+        {line: 'green yellow', name: 'U Street', transfer: false, transferLines: ''},
         {line: 'green yellow', name: 'Shaw-Howard U', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Mt Vernon Sq', transfer: false, transferLines: ''},
+        {line: 'green yellow', name: 'Mount Vernon Square', transfer: false, transferLines: ''},
         {line: 'green yellow', name: 'Gallery Place', transfer: false, transferLines: 'yellow green green'},
         {line: 'green yellow', name: 'Archives', transfer: false, transferLines: ''},
         {line: 'green yellow', name: "L'Enfant Plaza", transfer: false, transferLines: 'yellow green orange silver blue'},
@@ -44,9 +44,9 @@ function Green() {
         {line: 'green', name: 'Anacostia', transfer: false, transferLines: ''},
         {line: 'green', name: 'Congress Heights', transfer: false, transferLines: ''},
         {line: 'green', name: 'Southern Ave', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Naylor Rd', transfer: false, transferLines: ''},
+        {line: 'green', name: 'Naylor Road', transfer: false, transferLines: ''},
         {line: 'green', name: 'Suitland', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Branch Ave', transfer: false, transferLines: ''},
+        {line: 'green', name: 'Branch Avenue', transfer: false, transferLines: ''},
     ];
     
     
@@ -76,13 +76,13 @@ function Green() {
 
             let greenLineTrains : any = await response.json();
 
-            let greenLineConsole : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR');
-            console.log('all GR', greenLineConsole)
+            //let greenLineConsole : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR');
+            //console.log('all GR', greenLineConsole)
 
-            let greenLineNorth : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 1 && !lines.isCurrentlyHoldingOrSlow);
-            let greenLineSouth : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 2 && !lines.isCurrentlyHoldingOrSlow);
-            let greenLineNorthAtStation : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
-            let greenLineSouthAtStation : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
+            let greenLineNorth : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 1 && lines.minutesAway > 0);
+            let greenLineSouth : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 2 && lines.minutesAway > 0);
+            let greenLineNorthAtStation : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 1 && lines.minutesAway === 0);
+            let greenLineSouthAtStation : any = greenLineTrains.filter((lines : any) => lines.Line === 'GR' && lines.directionNumber === 2 && lines.minutesAway === 0);
 
             setNorthBoundTrains(greenLineNorth);
             setSouthBoundTrains(greenLineSouth);

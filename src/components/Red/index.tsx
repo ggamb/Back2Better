@@ -85,10 +85,10 @@ function Red() {
             //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
             //console.log('all RD', redLineConsole)
 
-            let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && !lines.isCurrentlyHoldingOrSlow);
-            let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && !lines.isCurrentlyHoldingOrSlow);
-            let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
-            let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
+            let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.minutesAway > 0);
+            let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.minutesAway > 0);
+            let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.minutesAway === 0);
+            let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.minutesAway === 0);
 
             setNorthBoundTrains(redLineNorth);
             setSouthBoundTrains(redLineSouth);
