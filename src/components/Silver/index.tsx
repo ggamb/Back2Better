@@ -106,11 +106,11 @@ function Silver() {
     useEffect(() => {
         getSilverLineTrains();
 
-        /*const interval=setInterval(()=>{
+        const interval=setInterval(()=>{
             getSilverLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     

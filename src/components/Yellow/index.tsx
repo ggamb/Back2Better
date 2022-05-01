@@ -96,11 +96,11 @@ function Yellow() {
     useEffect(() => {
         getYellowLineTrains();
 
-        /*const interval=setInterval(()=>{
+        const interval=setInterval(()=>{
             getYellowLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     

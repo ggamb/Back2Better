@@ -97,11 +97,11 @@ function Green() {
     useEffect(() => {
         getGreenLineTrains();
 
-        /*const interval=setInterval(()=>{
-            getgreenLineTrains();
+        const interval=setInterval(()=>{
+            getGreenLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     

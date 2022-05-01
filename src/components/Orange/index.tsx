@@ -107,11 +107,11 @@ function Orange() {
     useEffect(() => {
         getOrangeLineTrains();
 
-        /*const interval=setInterval(()=>{
-            getYellowLineTrains();
+        const interval=setInterval(()=>{
+            getOrangeLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     

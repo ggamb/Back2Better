@@ -81,8 +81,8 @@ function Blue() {
 
             let blueLineTrains : any = await response.json();
 
-            let blueLineConsole : any = blueLineTrains.filter((lines : any) => lines.Line === 'BL');
-            console.log('all BL', blueLineConsole)
+            //let blueLineConsole : any = blueLineTrains.filter((lines : any) => lines.Line === 'BL');
+           // console.log('all BL', blueLineConsole)
 
             let blueLineEast : any = blueLineTrains.filter((lines : any) => lines.Line === 'BL' && lines.directionNumber === 1 && lines.minutesAway > 0);
             let blueLineWest : any = blueLineTrains.filter((lines : any) => lines.Line === 'BL' && lines.directionNumber === 2 && lines.minutesAway > 0);
@@ -102,11 +102,11 @@ function Blue() {
     useEffect(() => {
         getYellowLineTrains();
 
-        /*const interval=setInterval(()=>{
+        const interval=setInterval(()=>{
             getYellowLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     
