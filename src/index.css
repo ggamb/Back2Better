@@ -169,6 +169,10 @@ ul {
   left: 30px;
 }
 
+.train-at-station-right {
+  position: absolute;
+  left: 110px
+}
 
 .train-icon-container {
   position: absolute;
@@ -183,7 +187,41 @@ ul {
   align-items: center;
 }
 
+.train-icon-container-right {
+  position: absolute;
+  width: 90px;
+  z-index: 3;
+  cursor: pointer;
+  display: flex;
+  align-content: baseline;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  align-items: center;
+  margin-left: 150px;
+}
+
+.train-icon-container-right-transit {
+  position: absolute;
+  width: 90px;
+  z-index: 3;
+  cursor: pointer;
+  display: flex;
+  align-content: baseline;
+  top: 50%;
+  -ms-transform: translateY(-50%);
+  transform: translateY(-50%);
+  align-items: center;
+  justify-content: space-around;
+}
+
 .train-info-left {
+  display: inline-block;
+  font-size: 9px;
+  line-height: 9px;
+}
+
+.train-info-right {
   display: inline-block;
   font-size: 9px;
   line-height: 9px;

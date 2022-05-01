@@ -89,7 +89,7 @@ function Red() {
             let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
             let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
 
-            console.log('all RD', redLineConsole)
+            //console.log('all RD', redLineConsole)
 
             setNorthBoundTrains(redLineNorth);
             setSouthBoundTrains(redLineSouth);
@@ -104,11 +104,11 @@ function Red() {
     useEffect(() => {
         getRedLineTrains();
 
-        /*const interval=setInterval(()=>{
-            getRedLineTrains()
+        const interval=setInterval(()=>{
+            getRedLineTrains();
         },10000)
 
-        return()=>clearInterval(interval)*/
+        return()=>clearInterval(interval)
 
     }, []);
     
@@ -124,6 +124,7 @@ function Red() {
                                 <>
                                 <div className="station-row">
                                     <div className="station-dot"></div>
+                                    {/*Maps southbound trains at stations*/}
                                         {southBoundTrainsAtStation.length ?
                                             (
                                                 <>                                          
@@ -148,13 +149,25 @@ function Red() {
                                                 <></>
                                             )
                                         }
+                                        {/*Maps northbound trains at stations*/}
                                         {northBoundTrainsAtStation.length ?
                                             (
                                                 <>                                          
                                                     {
                                                         northBoundTrainsAtStation.map(northTrains => {
                                                             if(northTrains.currentStationName === station.name) 
-                                                            return <div key={northTrains.trainId} className="train-at-station-right">🚇↑</div>
+                                                            return ( 
+                                                                <>
+                                                                <div key={northTrains.trainId} className="train-at-station-right">🚇↑</div>
+                                                                <div className="train-icon-container-right"> 
+                                                                    <div className="train-info-right">
+                                                                        <p className="train-category">{northTrains.Min}</p>
+                                                                        <p>{northTrains.Car}-car train</p>
+                                                                        <p className="train-Id">Train {northTrains.trainId}</p>
+                                                                    </div>
+                                                                </div>
+                                                                </>
+                                                            )
                                                         })
                                                     }
                                                 </>
@@ -167,6 +180,7 @@ function Red() {
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
+                                    {/*Maps southbound trains in between stations*/}
                                     {southBoundTrains.length ?
                                         (
                                             <>                                          
@@ -190,17 +204,6 @@ function Red() {
                                                                 </div>
                                                             </>
                                                         )
-                                                    
-
-                                                        {/*                                                               
-                                                         <div className="train-icon-container">
-                                                                    <div className="train-info-left">
-                                                                        <p className="train-category">{southTrains.Min}</p>
-                                                                        <p>{southTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
-                                                                    </div>
-                                                                    <div key={southTrains.trainId} className="train-at-station">🚇↓</div>
-                                                                </div> */}
                                                     })
                                                 }
                                             </>
@@ -211,14 +214,30 @@ function Red() {
                                     }
                                 </div>
                                 <div className="between-station on-right">                                   
-
+                                   {/*Maps northbound trains in between stations*/}
                                     {northBoundTrains.length ?
                                         (
                                             <>                                          
                                                 {
                                                     northBoundTrains.map(northTrains => {
-                                                        if(northTrains.currentStationName === station.name) 
-                                                        return <div key={northTrains.trainId} className="">🚇↑</div>
+                                                        if(northTrains.previousStationName === station.name) 
+                                                        return( 
+                                                            <>
+                                                                <div className="train-icon-container-right-transit">
+                                                                    <div key={northTrains.trainId} className="train-in-transit-right">🚇↑</div>
+                                                                    <div className="train-info-right">
+                                                                        {northTrains.Min === 'ARR' || northTrains.Min === 'BRD' ? (
+                                                                                <p className="train-category">{northTrains.Min}</p>
+                                                                            ) : (
+                                                                                <p className="train-category">{northTrains.Min} min</p>
+                                                                            )
+                                                                        }
+                                                                        <p>{northTrains.Car}-car train</p>
+                                                                        <p className="train-Id">Train {northTrains.trainId}</p>
+                                                                    </div>
+                                                                </div>
+                                                            </>
+                                                        )
                                                     })
                                                 }
                                             </>
