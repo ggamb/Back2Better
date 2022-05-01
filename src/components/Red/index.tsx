@@ -82,14 +82,13 @@ function Red() {
 
             let redLineTrains : any = await response.json();
 
-            let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+            //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+            //console.log('all RD', redLineConsole)
 
             let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && !lines.isCurrentlyHoldingOrSlow);
             let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && !lines.isCurrentlyHoldingOrSlow);
             let redLineNorthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.isCurrentlyHoldingOrSlow);
             let redLineSouthAtStation : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.isCurrentlyHoldingOrSlow);
-
-            //console.log('all RD', redLineConsole)
 
             setNorthBoundTrains(redLineNorth);
             setSouthBoundTrains(redLineSouth);
