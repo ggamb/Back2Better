@@ -11,9 +11,43 @@ import Red from './components/Red';
 import Blue from './components/Blue';
 import Orange from './components/Orange';
 import Silver from './components/Silver';
-import NoMatch from './pages/NoMatch'
+import NoMatch from './pages/NoMatch';
+import Footer from './components/Footer';
 
 function App() {
+
+  const stationsList = [
+    {
+      name: 'red',
+      display: 'Red',
+      shortDisplay: 'RD'
+    },
+    {
+      name: 'green',
+      display: 'Green',
+      shortDisplay: 'GR'
+    },
+    {
+      name: 'yellow',
+      display: 'Yellow',
+      shortDisplay: 'YL'
+    },
+    {
+      name: 'blue',
+      display: 'Blue',
+      shortDisplay: 'BL'
+    },
+    {
+      name: 'orange',
+      display: 'Orange',
+      shortDisplay: 'OR'
+    },
+    {
+      name: 'silver',
+      display: 'Silver',
+      shortDisplay: 'SV'
+    },
+  ];
   
 
   const App = () => {
@@ -42,8 +76,9 @@ function App() {
 
   return (
     <Router>
-      <Nav />
+      <Nav stationsList = {stationsList}/>
       <App />
+      <Footer footerData = {stationsList}/>
     </Router>
   );
 }

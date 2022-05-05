@@ -2,65 +2,33 @@
 import { Link } from "react-router-dom";
 import Hamburger from "../Hamburger";
 import { useState } from "react";
+import Footer from "../Footer";
 
-function Nav() {
-  const stationsList = [
-    {
-      name: 'red',
-      display: 'Red'
-    },
-    {
-      name: 'green',
-      display: 'Green'
-    },
-    {
-      name: 'yellow',
-      display: 'Yellow'
-    },
-    {
-      name: 'blue',
-      display: 'Blue'
-    },
-    {
-      name: 'orange',
-      display: 'Orange'
-    },
-    {
-      name: 'silver',
-      display: 'Silver'
-    },
-  ];
-
-  const [hamburgerOpen, setHamburgerOpen] = useState(false);
-  
-  const toggleHamburger = () => {
-    setHamburgerOpen(!hamburgerOpen);
-  }
-
+function Nav({stationsList} : any) {
   return (
+    <>
     <header>
       <nav>
-        <ul>
+        <ul className="header-ul">
           <h1>
             <Link to="/">
               <span role="img" aria-label="Back2Better Logo - metro car emoji">🚇Back2Better</span>
             </Link>
           </h1>
             {stationsList.map(station => (
-              <li key = {station.name}>
-                <Link to={`/${station.name}`} >
-                  {station.display}
-                </Link>
-              </li>
+              <>
+                <li key = {station.name}>
+                <span className="station-circle" style={{'background-color' : `${station.name}`}}></span>
+                  <Link to={`/${station.name}`} >
+                    {station.display}
+                  </Link>
+                </li>
+              </>
             ))}
-
         </ul>
-        <div className="outer-hamburger" onClick={toggleHamburger}>
-            <Hamburger />
-        </div>
-
       </nav>
     </header>
+    </>
   );
 }
 
