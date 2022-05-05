@@ -5,6 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import Hamburger from '../Hamburger'
 
 function Home() {
     
@@ -55,7 +56,7 @@ function Home() {
                 lineArray.push(lineArrayEntry);
             }
 
-            console.log(lineArray)
+            //console.log(lineArray)
 
             setMetroLineData(lineArray);
 
@@ -87,20 +88,20 @@ function Home() {
 
 
     return (
+        <div className="card-holder">
         <>
         {
             metroLineData.length ? (
                     <>
                     {metroLineData.map(line => (
                         <>
-                        <div className="flex-row card-spacing">
-                            <Card variant = 'outlined' sx = {{backgroundColor : 'wheat'}}>
+                            <Card  variant = 'outlined' sx = {{backgroundColor : 'wheat'}}>
                                 <>
                                 <CardContent>
                                         <Typography sx={{ fontSize: 30 }} className = {line.lineCode} gutterBottom>
                                             {line.lineCode}
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Line status: 
                                             {(line.trainFrequencyStatus) == 'OK' ? 
                                                 ( <span> {line.trainFrequencyStatus} 😊</span>) 
@@ -109,19 +110,19 @@ function Home() {
                                             }
                                             <br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Average wait time: {line.averagePlatformWaitTime.toFixed(2)} minutes<br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Expected train frequency: {line.expectedTrainFrequency.toFixed(2)} minutes<br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Average train frequency: {line.averageTrainFrequency.toFixed(2)} minutes<br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Max train delay: {toMinutes(line.maximumTrainDelay)} <br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Time trend:  
                                             {(line.platformWaitTimeTrendStatus === 'NEUTRAL') ? (
                                                 <span> Neutral 😑</span>
@@ -132,7 +133,7 @@ function Home() {
                                             }
                                             <br/>
                                         </Typography>
-                                        <Typography variant="h5" component="div">
+                                        <Typography variant="h6" component="div">
                                             Trains on {line.lineCode} line: {line.numTrains}<br/>
                                         </Typography>
                                     </CardContent>
@@ -141,7 +142,6 @@ function Home() {
                                 </CardActions>
                                 </>
                             </Card>
-                        </div>
                         </>
                     ))}
                     </>
@@ -153,6 +153,7 @@ function Home() {
             )
         }
         </>
+        </div>
         
     )
 }

@@ -85,8 +85,8 @@ function Silver() {
 
             let silverLineTrains : any = await response.json();
 
-            let silverLineConsole : any = silverLineTrains.filter((lines : any) => lines.Line === 'SV');
-            console.log('all SL', silverLineConsole)
+            //let silverLineConsole : any = silverLineTrains.filter((lines : any) => lines.Line === 'SV');
+            //console.log('all SL', silverLineConsole);
 
             let silverLineEast : any = silverLineTrains.filter((lines : any) => lines.Line === 'SV' && lines.directionNumber === 1 && lines.minutesAway > 0);
             let silverLineWest : any = silverLineTrains.filter((lines : any) => lines.Line === 'SV' && lines.directionNumber === 2 && lines.minutesAway > 0);

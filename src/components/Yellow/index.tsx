@@ -75,8 +75,8 @@ function Yellow() {
 
             let yellowLineTrains : any = await response.json();
 
-            let yellowLineConsole : any = yellowLineTrains.filter((lines : any) => lines.Line === 'YL');
-            console.log('all YL', yellowLineConsole)
+            //let yellowLineConsole : any = yellowLineTrains.filter((lines : any) => lines.Line === 'YL');
+            //console.log('all YL', yellowLineConsole)
 
             let yellowLineNorth : any = yellowLineTrains.filter((lines : any) => lines.Line === 'YL' && lines.directionNumber === 1 && lines.minutesAway > 0);
             let yellowLineSouth : any = yellowLineTrains.filter((lines : any) => lines.Line === 'YL' && lines.directionNumber === 2 && lines.minutesAway > 0);

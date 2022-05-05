@@ -86,8 +86,8 @@ function Orange() {
 
             let orangeLineTrains : any = await response.json();
 
-            let orangeLineConsole : any = orangeLineTrains.filter((lines : any) => lines.Line === 'OR');
-            console.log('all OR', orangeLineConsole)
+            //let orangeLineConsole : any = orangeLineTrains.filter((lines : any) => lines.Line === 'OR');
+            //console.log('all OR', orangeLineConsole)
 
             let orangeLineEast : any = orangeLineTrains.filter((lines : any) => lines.Line === 'OR' && lines.directionNumber === 1 && lines.minutesAway > 0);
             let orangeLineWest : any = orangeLineTrains.filter((lines : any) => lines.Line === 'OR' && lines.directionNumber === 2 && lines.minutesAway > 0);

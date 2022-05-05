@@ -21,23 +21,64 @@ nav {
   width: 100%;
 }
 
+nav select {
+  display: none;
+}
+
+header nav ul {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
 ul {
   list-style-type: none;
+}
+
+.outer-hamburger {
+  display: none;
+  z-index: 6;
+}
+
+.hamburger{
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  justify-content: space-around;
+  flex-flow: column nowrap;
+  z-index: 10;
+}
+
+.burger{
+  width: 2rem;
+  height: 0.25rem;
+  border-radius: 10px;
+  background-color: black;
+  transform-origin: 1px;
+  transition: all 0.3s linear;
+}
+
+.card-holder {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 10px 10px;
+}
+
+.home-cards {
+  height: 500px;
 }
 
 
 .flex-row {
   display: flex;
-  justify-content: space-around;
+  justify-content: space-evenly;
   align-items: center;
 }
 
 .card-style {
   background-color: black;
-}
-
-.card-spacing {
-  margin: 10px;
 }
 
 .RD {
@@ -322,3 +363,32 @@ ul {
   line-height: 13px;
   font-weight: 500;
 }
+
+@media screen and (max-width: 320px) {
+  .card-holder {
+    justify-content: center;
+    margin-left: 10px;
+  }
+
+  nav ul
+  { 
+    display: none; 
+  }
+
+
+
+}
+
+
+@media screen and (max-width: 426px) {
+  .card-holder {
+    justify-content: center;
+  }
+  
+  .line-and-station-container {
+    width: 350px;
+    margin-left: 5px;
+  }
+}
+
+
