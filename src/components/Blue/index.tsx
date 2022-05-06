@@ -6,6 +6,7 @@ function Blue() {
         name: string;
         transfer: boolean;
         transferLines: string;
+        stationCode: string;
     }
 
     interface BlueTrains {
@@ -25,33 +26,33 @@ function Blue() {
     }
     
     const blueLineStations : Array<Station> = [ 
-        {line: 'blue silver', name: 'Largo Town Center', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Morgan Boulevard', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Addison Road', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Capitol Heights', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Benning Road', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Stadium-Armory', transfer: false, transferLines: 'orange silver blue'},
-        {line: 'blue silver orange', name: 'Potomac Avenue', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Eastern Market', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Capitol South', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Federal Center SW', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: "L'Enfant Plaza", transfer: false, transferLines: 'orange silver blue yellow green'},
-        {line: 'blue silver orange', name: 'Smithsonian', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Federal Triangle', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red'},
-        {line: 'blue silver orange', name: 'McPherson Squre', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Farragut West', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Foggy Bottom-GWU', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Rosslyn', transfer: false, transferLines: 'orange silver blue'},
-        {line: 'blue', name: 'Arlington Cemetery', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Pentagon', transfer: false, transferLines: 'blue yellow'},
-        {line: 'blue yellow', name: 'Pentagon City', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Crystal City', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Ronald Reagan Washington National Airport', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Braddock Road', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'King Street-Old Town', transfer: false, transferLines: 'blue yellow'},
-        {line: 'blue', name: 'Van Dorn Street', transfer: false, transferLines: ''},
-        {line: 'blue', name: 'Franconia-Springfield', transfer: false, transferLines: ''},
+        {line: 'blue silver', name: 'Largo Town Center', transfer: false, transferLines: '', stationCode: 'G05'},
+        {line: 'blue silver', name: 'Morgan Boulevard', transfer: false, transferLines: '', stationCode: 'G04'},
+        {line: 'blue silver', name: 'Addison Road', transfer: false, transferLines: '', stationCode: 'G03'},
+        {line: 'blue silver', name: 'Capitol Heights', transfer: false, transferLines: '', stationCode: 'G02'},
+        {line: 'blue silver', name: 'Benning Road', transfer: false, transferLines: '', stationCode: 'G01'},
+        {line: 'blue silver orange', name: 'Stadium-Armory', transfer: false, transferLines: 'orange silver blue', stationCode: 'D08'},
+        {line: 'blue silver orange', name: 'Potomac Avenue', transfer: false, transferLines: '', stationCode: 'D07'},
+        {line: 'blue silver orange', name: 'Eastern Market', transfer: false, transferLines: '', stationCode: 'D06'},
+        {line: 'blue silver orange', name: 'Capitol South', transfer: false, transferLines: '', stationCode: 'D05'},
+        {line: 'blue silver orange', name: 'Federal Center SW', transfer: false, transferLines: '', stationCode: 'D04'},
+        {line: 'blue silver orange', name: "L'Enfant Plaza", transfer: false, transferLines: 'orange silver blue yellow green', stationCode: 'D03,F03'},
+        {line: 'blue silver orange', name: 'Smithsonian', transfer: false, transferLines: '', stationCode: 'D02'},
+        {line: 'blue silver orange', name: 'Federal Triangle', transfer: false, transferLines: '', stationCode: 'D01'},
+        {line: 'blue silver orange', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red', stationCode: 'C01,A01'},
+        {line: 'blue silver orange', name: 'McPherson Squre', transfer: false, transferLines: '', stationCode: 'C02'},
+        {line: 'blue silver orange', name: 'Farragut West', transfer: false, transferLines: '', stationCode: 'C03'},
+        {line: 'blue silver orange', name: 'Foggy Bottom-GWU', transfer: false, transferLines: '', stationCode: 'C04'},
+        {line: 'blue silver orange', name: 'Rosslyn', transfer: false, transferLines: 'orange silver blue', stationCode: 'C05'},
+        {line: 'blue', name: 'Arlington Cemetery', transfer: false, transferLines: '', stationCode: 'C06'},
+        {line: 'blue yellow', name: 'Pentagon', transfer: false, transferLines: 'blue yellow', stationCode: 'C07'},
+        {line: 'blue yellow', name: 'Pentagon City', transfer: false, transferLines: '', stationCode: 'C08'},
+        {line: 'blue yellow', name: 'Crystal City', transfer: false, transferLines: '', stationCode: 'C09'},
+        {line: 'blue yellow', name: 'Ronald Reagan Washington National Airport', transfer: false, transferLines: '', stationCode: 'C10'},
+        {line: 'blue yellow', name: 'Braddock Road', transfer: false, transferLines: '', stationCode: 'C12'},
+        {line: 'blue yellow', name: 'King Street-Old Town', transfer: false, transferLines: 'blue yellow', stationCode: 'C13'},
+        {line: 'blue', name: 'Van Dorn Street', transfer: false, transferLines: '', stationCode: 'J02'},
+        {line: 'blue', name: 'Franconia-Springfield', transfer: false, transferLines: '', stationCode: 'J03'},
     ];
 
 

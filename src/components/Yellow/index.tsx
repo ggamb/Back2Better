@@ -6,6 +6,7 @@ function Yellow() {
         name: string;
         transfer: boolean;
         transferLines: string;
+        stationCode: string;
     }
 
     interface YellowTrains {
@@ -25,27 +26,27 @@ function Yellow() {
     }
     
     const yellowLineStations : Array<Station> = [ 
-        {line: 'green yellow', name: 'Greenbelt', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'College Park', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: "Prince George's Plaza", transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'West Hyattsville', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Fort Totten', transfer: false, transferLines: 'yellow green yellow'},
-        {line: 'green yellow', name: 'Georgia Avenue-Petworth', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Columbia Heights', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'U Street', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Shaw-Howard U', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Mount Vernon Square', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Gallery Place', transfer: false, transferLines: 'yellow green yellow'},
-        {line: 'green yellow', name: 'Archives', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: "L'Enfant Plaza", transfer: false, transferLines: 'yellow green orange silver blue'},
-        {line: 'blue yellow', name: 'Pentagon', transfer: false, transferLines: 'blue yellow'},
-        {line: 'blue yellow', name: 'Pentagon City', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Crystal City', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Ronald Reagan Washington National Airport', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'Braddock Road', transfer: false, transferLines: ''},
-        {line: 'blue yellow', name: 'King Street-Old Town', transfer: false, transferLines: 'blue yellow'},
-        {line: 'yellow', name: 'Eisenhower Avenue', transfer: false, transferLines: ''},
-        {line: 'yellow', name: 'Huntington', transfer: false, transferLines: ''},
+        {line: 'green yellow', name: 'Greenbelt', transfer: false, transferLines: '', stationCode: 'E10'},
+        {line: 'green yellow', name: 'College Park', transfer: false, transferLines: '', stationCode: 'E09'},
+        {line: 'green yellow', name: "Prince George's Plaza", transfer: false, transferLines: '', stationCode: 'E08'},
+        {line: 'green yellow', name: 'West Hyattsville', transfer: false, transferLines: '', stationCode: 'E07'},
+        {line: 'green yellow', name: 'Fort Totten', transfer: false, transferLines: 'yellow green yellow', stationCode: 'E06,B06'},
+        {line: 'green yellow', name: 'Georgia Avenue-Petworth', transfer: false, transferLines: '', stationCode: 'E05'},
+        {line: 'green yellow', name: 'Columbia Heights', transfer: false, transferLines: '', stationCode: 'E04'},
+        {line: 'green yellow', name: 'U Street', transfer: false, transferLines: '', stationCode: 'E03'},
+        {line: 'green yellow', name: 'Shaw-Howard U', transfer: false, transferLines: '', stationCode: 'E02'},
+        {line: 'green yellow', name: 'Mount Vernon Square', transfer: false, transferLines: '', stationCode: 'E01'},
+        {line: 'green yellow', name: 'Gallery Place', transfer: false, transferLines: 'yellow green yellow', stationCode: 'F01,B01'},
+        {line: 'green yellow', name: 'Archives', transfer: false, transferLines: '', stationCode: 'F02'},
+        {line: 'green yellow', name: "L'Enfant Plaza", transfer: false, transferLines: 'yellow green orange silver blue', stationCode: 'F03,D03'},
+        {line: 'blue yellow', name: 'Pentagon', transfer: false, transferLines: 'blue yellow', stationCode: 'C07'},
+        {line: 'blue yellow', name: 'Pentagon City', transfer: false, transferLines: '', stationCode: 'C08'},
+        {line: 'blue yellow', name: 'Crystal City', transfer: false, transferLines: '', stationCode: 'C09'},
+        {line: 'blue yellow', name: 'Ronald Reagan Washington National Airport', transfer: false, transferLines: '', stationCode: 'C10'},
+        {line: 'blue yellow', name: 'Braddock Road', transfer: false, transferLines: '', stationCode: 'C12'},
+        {line: 'blue yellow', name: 'King Street-Old Town', transfer: false, transferLines: 'blue yellow', stationCode: 'C13'},
+        {line: 'yellow', name: 'Eisenhower Avenue', transfer: false, transferLines: '', stationCode: 'C14'},
+        {line: 'yellow', name: 'Huntington', transfer: false, transferLines: '', stationCode: 'C15'},
     ];
 
 

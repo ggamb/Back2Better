@@ -7,6 +7,7 @@ function Green() {
         name: string;
         transfer: boolean;
         transferLines: string;
+        stationCode: string;
     }
 
     interface GreenTrains {
@@ -26,27 +27,27 @@ function Green() {
     }
 
     const greenLineStations : Array<Station> = [
-        {line: 'green yellow', name: 'Greenbelt', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'College Park', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: "Prince George's Plaza", transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'West Hyattsville', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Fort Totten', transfer: false, transferLines: 'yellow green green'},
-        {line: 'green yellow', name: 'Georgia Avenue-Petworth', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Columbia Heights', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'U Street', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Shaw-Howard U', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Mount Vernon Square', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: 'Gallery Place', transfer: false, transferLines: 'yellow green green'},
-        {line: 'green yellow', name: 'Archives', transfer: false, transferLines: ''},
-        {line: 'green yellow', name: "L'Enfant Plaza", transfer: false, transferLines: 'yellow green orange silver blue'},
-        {line: 'green', name: 'Waterfront', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Navy Yard-Ballpark', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Anacostia', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Congress Heights', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Southern Ave', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Naylor Road', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Suitland', transfer: false, transferLines: ''},
-        {line: 'green', name: 'Branch Avenue', transfer: false, transferLines: ''},
+        {line: 'green yellow', name: 'Greenbelt', transfer: false, transferLines: '', stationCode: 'E10'},
+        {line: 'green yellow', name: 'College Park', transfer: false, transferLines: '', stationCode: 'E09'},
+        {line: 'green yellow', name: "Prince George's Plaza", transfer: false, transferLines: '', stationCode: 'E08'},
+        {line: 'green yellow', name: 'West Hyattsville', transfer: false, transferLines: '', stationCode: 'E07'},
+        {line: 'green yellow', name: 'Fort Totten', transfer: false, transferLines: 'yellow green green', stationCode: 'E06,B06'},
+        {line: 'green yellow', name: 'Georgia Avenue-Petworth', transfer: false, transferLines: '', stationCode: 'E05'},
+        {line: 'green yellow', name: 'Columbia Heights', transfer: false, transferLines: '', stationCode: 'E04'},
+        {line: 'green yellow', name: 'U Street', transfer: false, transferLines: '', stationCode: 'E03'},
+        {line: 'green yellow', name: 'Shaw-Howard U', transfer: false, transferLines: '', stationCode: 'E02'},
+        {line: 'green yellow', name: 'Mount Vernon Square', transfer: false, transferLines: '', stationCode: 'E01'},
+        {line: 'green yellow', name: 'Gallery Place', transfer: false, transferLines: 'yellow green green', stationCode: 'F01,B01'},
+        {line: 'green yellow', name: 'Archives', transfer: false, transferLines: '', stationCode: 'F02'},
+        {line: 'green yellow', name: "L'Enfant Plaza", transfer: false, transferLines: 'yellow green orange silver blue', stationCode: 'F03,D03'},
+        {line: 'green', name: 'Waterfront', transfer: false, transferLines: '', stationCode: 'F04'},
+        {line: 'green', name: 'Navy Yard-Ballpark', transfer: false, transferLines: '', stationCode: 'F05'},
+        {line: 'green', name: 'Anacostia', transfer: false, transferLines: '', stationCode: 'F06'},
+        {line: 'green', name: 'Congress Heights', transfer: false, transferLines: '', stationCode: 'F07'},
+        {line: 'green', name: 'Southern Ave', transfer: false, transferLines: '', stationCode: 'F08'},
+        {line: 'green', name: 'Naylor Road', transfer: false, transferLines: '', stationCode: 'F09'},
+        {line: 'green', name: 'Suitland', transfer: false, transferLines: '', stationCode: 'F10'},
+        {line: 'green', name: 'Branch Avenue', transfer: false, transferLines: '', stationCode: 'F11'},
     ];
     
     

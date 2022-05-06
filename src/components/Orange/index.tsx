@@ -7,6 +7,7 @@ function Orange() {
         name: string;
         transfer: boolean;
         transferLines: string;
+        stationCode: string;
     }
 
     interface OrangeTrains {
@@ -26,37 +27,37 @@ function Orange() {
     }
 
     const orangeLineStations : Array<Station> = [ 
-        {line: 'orange', name: 'New Carrollton', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Landover', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Cheverly', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Deanwood', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Minnesota Ave', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Largo Town Center', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Morgan Blvd', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Addison Road', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Capitol Heights', transfer: false, transferLines: ''},
-        {line: 'blue silver', name: 'Benning Road', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Stadium-Armory', transfer: false, transferLines: 'orange silver blue'},
-        {line: 'blue silver orange', name: 'Potomac Avenue', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Eastern Market', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Capitol South', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Federal Center SW', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: "L'Enfant Plaza", transfer: false, transferLines: 'orange silver blue yellow green'},
-        {line: 'blue silver orange', name: 'Smithsonian', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Federal Triangle', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red'},
-        {line: 'blue silver orange', name: 'McPherson Square', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Farragut West', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Foggy Bottom-GWU', transfer: false, transferLines: ''},
-        {line: 'blue silver orange', name: 'Rosslyn', transfer: false, transferLines: 'orange silver blue'},
-        {line: 'silver orange', name: 'Court House', transfer: false, transferLines: ''},
-        {line: 'silver orange', name: 'Clarendon', transfer: false, transferLines: ''},
-        {line: 'silver orange', name: 'Virginia Square-GMU', transfer: false, transferLines: ''},
-        {line: 'silver orange', name: 'Ballston', transfer: false, transferLines: ''},
-        {line: 'silver orange', name: 'East Falls Church', transfer: false, transferLines: 'orange silver'},
-        {line: 'orange', name: 'West Falls Church', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Dunn Loring', transfer: false, transferLines: ''},
-        {line: 'orange', name: 'Vienna/Fairfax-GMU', transfer: false, transferLines: ''},
+        {line: 'orange', name: 'New Carrollton', transfer: false, transferLines: '', stationCode: 'D13'},
+        {line: 'orange', name: 'Landover', transfer: false, transferLines: '', stationCode: 'D12'},
+        {line: 'orange', name: 'Cheverly', transfer: false, transferLines: '', stationCode: 'D11'},
+        {line: 'orange', name: 'Deanwood', transfer: false, transferLines: '', stationCode: 'D10'},
+        {line: 'orange', name: 'Minnesota Ave', transfer: false, transferLines: '', stationCode: 'D09'},
+        {line: 'blue silver', name: 'Largo Town Center', transfer: false, transferLines: '', stationCode: 'G05'},
+        {line: 'blue silver', name: 'Morgan Blvd', transfer: false, transferLines: '', stationCode: 'G04'},
+        {line: 'blue silver', name: 'Addison Road', transfer: false, transferLines: '', stationCode: 'G03'},
+        {line: 'blue silver', name: 'Capitol Heights', transfer: false, transferLines: '', stationCode: 'G02'},
+        {line: 'blue silver', name: 'Benning Road', transfer: false, transferLines: '', stationCode: 'G01'},
+        {line: 'blue silver orange', name: 'Stadium-Armory', transfer: false, transferLines: 'orange silver blue', stationCode: 'D08'},
+        {line: 'blue silver orange', name: 'Potomac Avenue', transfer: false, transferLines: '', stationCode: 'D07'},
+        {line: 'blue silver orange', name: 'Eastern Market', transfer: false, transferLines: '', stationCode: 'D06'},
+        {line: 'blue silver orange', name: 'Capitol South', transfer: false, transferLines: '', stationCode: 'D05'},
+        {line: 'blue silver orange', name: 'Federal Center SW', transfer: false, transferLines: '', stationCode: 'D04'},
+        {line: 'blue silver orange', name: "L'Enfant Plaza", transfer: false, transferLines: 'orange silver blue yellow green', stationCode: 'D03,F03'},
+        {line: 'blue silver orange', name: 'Smithsonian', transfer: false, transferLines: '', stationCode: 'D02'},
+        {line: 'blue silver orange', name: 'Federal Triangle', transfer: false, transferLines: '', stationCode: 'D01'},
+        {line: 'blue silver orange', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red', stationCode: 'C01,A01'},
+        {line: 'blue silver orange', name: 'McPherson Square', transfer: false, transferLines: '', stationCode: 'C02'},
+        {line: 'blue silver orange', name: 'Farragut West', transfer: false, transferLines: '', stationCode: 'C03'},
+        {line: 'blue silver orange', name: 'Foggy Bottom-GWU', transfer: false, transferLines: '', stationCode: 'C04'},
+        {line: 'blue silver orange', name: 'Rosslyn', transfer: false, transferLines: 'orange silver blue', stationCode: 'C05'},
+        {line: 'silver orange', name: 'Court House', transfer: false, transferLines: '', stationCode: 'K01'},
+        {line: 'silver orange', name: 'Clarendon', transfer: false, transferLines: '', stationCode: 'K02'},
+        {line: 'silver orange', name: 'Virginia Square-GMU', transfer: false, transferLines: '', stationCode: 'K03'},
+        {line: 'silver orange', name: 'Ballston', transfer: false, transferLines: '', stationCode: 'K04'},
+        {line: 'silver orange', name: 'East Falls Church', transfer: false, transferLines: 'orange silver', stationCode: 'K05'},
+        {line: 'orange', name: 'West Falls Church', transfer: false, transferLines: '', stationCode: 'K06'},
+        {line: 'orange', name: 'Dunn Loring', transfer: false, transferLines: '', stationCode: 'K07'},
+        {line: 'orange', name: 'Vienna/Fairfax-GMU', transfer: false, transferLines: '', stationCode: 'K08'},
     ];
 
 
