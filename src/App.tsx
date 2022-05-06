@@ -78,6 +78,7 @@ function App() {
     <Router>
       <Nav stationsList = {stationsList}/>
       <App />
+      <div className='gap'></div>
       <Footer footerData = {stationsList}/>
     </Router>
   );

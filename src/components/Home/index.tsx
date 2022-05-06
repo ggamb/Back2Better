@@ -95,7 +95,7 @@ function Home() {
                     <>
                     {metroLineData.map(line => (
                         <>
-                            <Card  variant = 'outlined' sx = {{backgroundColor : 'wheat'}}>
+                            <Card className="main-card" variant = 'outlined' sx = {{backgroundColor : 'wheat'}}>
                                 <>
                                 <CardContent>
                                         <Typography sx={{ fontSize: 30 }} className = {line.lineCode} gutterBottom>
@@ -145,8 +145,6 @@ function Home() {
                         </>
                     ))}
                     </>
-                
-                
             ) : 
             (
                 <h2>Loading Metro data</h2>

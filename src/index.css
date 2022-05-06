@@ -35,6 +35,10 @@ ul {
   list-style-type: none;
 }
 
+.gap {
+  padding-bottom: 30px;
+}
+
 footer {
   position: fixed;
   bottom: 0;
@@ -367,7 +371,6 @@ footer {
 }
 
 @media screen and (max-width: 320px) {
-
   .header-ul { 
     display: none;
   }
