@@ -138,8 +138,6 @@ function Red() {
         }  catch (err) {
             console.log(err)
         }
-
-
     }
 
     return (

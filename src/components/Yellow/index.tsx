@@ -104,6 +104,33 @@ function Yellow() {
         return()=>clearInterval(interval)
 
     }, []);
+
+    async function showStationTimes (e : any){
+        e.preventDefault();
+
+        console.log(e.target.id)
+
+        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${e.target.id}/trains`;
+
+        try {
+            let response : any = await fetch(metroHeroStationTimes, {
+                headers:  requestHeaders
+            });
+
+            if(!response.ok) {
+                throw new Error('API failure');
+            }
+
+            let stationTime : any = await response.json();
+
+            //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+            console.log('station time', stationTime)
+
+
+        }  catch (err) {
+            console.log(err)
+        }
+    }
     
 
     return (
@@ -116,7 +143,7 @@ function Yellow() {
                             {yellowLineStations.map(station => (
                                 <>
                                 <div className="station-row">
-                                    <div className="station-dot"></div>
+                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {showStationTimes}></div>
                                     {/*Maps southbound trains at stations*/}
                                         {southBoundTrainsAtStation.length ?
                                             (
