@@ -7,6 +7,7 @@ function Red() {
         name: string;
         transfer: boolean;
         transferLines: string;
+        stationCode: string;
     }
 
     interface RedTrains {
@@ -26,33 +27,33 @@ function Red() {
     }
     
     const redLineStations : Array<Station> = [ 
-        {line: 'red', name: 'Glenmont', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Wheaton', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Forest Glen', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Silver Spring', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Takoma', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Fort Totten', transfer: false, transferLines: 'red green yellow'},
-        {line: 'red', name: 'Brookland-CUA', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Rhode Island Avenue-Brentwood', transfer: false, transferLines: ''},
-        {line: 'red', name: 'NoMa-Gallaudet U', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Union Station', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Judiciary Square', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Gallery Place', transfer: false, transferLines: 'red green yellow'},
-        {line: 'red', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red'},
-        {line: 'red', name: 'Farragut North', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Dupont Circle', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Woodley Park', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Cleveland Park', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Van Ness-UDC', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Tenleytown-AU', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Friendship Heights', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Bethesda', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Medical Center', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Grosvenor-Strathmore', transfer: false, transferLines: ''},
-        {line: 'red', name: 'White Flint', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Twinbrook', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Rockville', transfer: false, transferLines: ''},
-        {line: 'red', name: 'Shady Grove', transfer: false, transferLines: ''},
+        {line: 'red', name: 'Glenmont', transfer: false, transferLines: '', stationCode: 'B11'},
+        {line: 'red', name: 'Wheaton', transfer: false, transferLines: '', stationCode: 'B10'},
+        {line: 'red', name: 'Forest Glen', transfer: false, transferLines: '', stationCode: 'B09'},
+        {line: 'red', name: 'Silver Spring', transfer: false, transferLines: '', stationCode: 'B08'},
+        {line: 'red', name: 'Takoma', transfer: false, transferLines: '', stationCode: 'B07'},
+        {line: 'red', name: 'Fort Totten', transfer: false, transferLines: 'red green yellow', stationCode: 'B06'},
+        {line: 'red', name: 'Brookland-CUA', transfer: false, transferLines: '', stationCode: 'B05'},
+        {line: 'red', name: 'Rhode Island Avenue-Brentwood', transfer: false, transferLines: '', stationCode: 'B04'},
+        {line: 'red', name: 'NoMa-Gallaudet U', transfer: false, transferLines: '', stationCode: 'B35'},
+        {line: 'red', name: 'Union Station', transfer: false, transferLines: '', stationCode: 'B03'},
+        {line: 'red', name: 'Judiciary Square', transfer: false, transferLines: '', stationCode: 'B02'},
+        {line: 'red', name: 'Gallery Place', transfer: false, transferLines: 'red green yellow', stationCode: 'B01'},
+        {line: 'red', name: 'Metro Center', transfer: false, transferLines: 'orange silver blue red', stationCode: 'A01'},
+        {line: 'red', name: 'Farragut North', transfer: false, transferLines: '', stationCode: 'A02'},
+        {line: 'red', name: 'Dupont Circle', transfer: false, transferLines: '', stationCode: 'A03'},
+        {line: 'red', name: 'Woodley Park', transfer: false, transferLines: '', stationCode: 'A04'},
+        {line: 'red', name: 'Cleveland Park', transfer: false, transferLines: '', stationCode: 'A05'},
+        {line: 'red', name: 'Van Ness-UDC', transfer: false, transferLines: '', stationCode: 'A06'},
+        {line: 'red', name: 'Tenleytown-AU', transfer: false, transferLines: '', stationCode: 'A07'},
+        {line: 'red', name: 'Friendship Heights', transfer: false, transferLines: '', stationCode: 'A08'},
+        {line: 'red', name: 'Bethesda', transfer: false, transferLines: '', stationCode: 'A09'},
+        {line: 'red', name: 'Medical Center', transfer: false, transferLines: '', stationCode: 'A10'},
+        {line: 'red', name: 'Grosvenor-Strathmore', transfer: false, transferLines: '', stationCode: 'A11'},
+        {line: 'red', name: 'White Flint', transfer: false, transferLines: '', stationCode: 'A12'},
+        {line: 'red', name: 'Twinbrook', transfer: false, transferLines: '', stationCode: 'A13'},
+        {line: 'red', name: 'Rockville', transfer: false, transferLines: '', stationCode: 'A14'},
+        {line: 'red', name: 'Shady Grove', transfer: false, transferLines: '', stationCode: 'A15'},
     ];
 
 
@@ -63,6 +64,7 @@ function Red() {
 
     const apiKey = process.env.REACT_APP_METROHERO;
     const metroHeroRedTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
+    
 
     const requestHeaders: any = new Headers();
     requestHeaders.set('Content-Type', 'application/json');
@@ -111,6 +113,34 @@ function Red() {
 
     }, []);
     
+    async function showStationTimes (e : any){
+        e.preventDefault();
+
+        console.log(e.target.id)
+
+        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${e.target.id}/trains`;
+
+        try {
+            let response : any = await fetch(metroHeroStationTimes, {
+                headers:  requestHeaders
+            });
+
+            if(!response.ok) {
+                throw new Error('API failure');
+            }
+
+            let stationTime : any = await response.json();
+
+            //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+            console.log('station time', stationTime)
+
+
+        }  catch (err) {
+            console.log(err)
+        }
+
+
+    }
 
     return (
         <>
@@ -122,7 +152,7 @@ function Red() {
                             {redLineStations.map(station => (
                                 <>
                                 <div className="station-row">
-                                    <div className="station-dot"></div>
+                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {showStationTimes}></div>
                                     {/*Maps southbound trains at stations*/}
                                         {southBoundTrainsAtStation.length ?
                                             (

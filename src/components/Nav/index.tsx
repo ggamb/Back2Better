@@ -1,8 +1,5 @@
 
 import { Link } from "react-router-dom";
-import Hamburger from "../Hamburger";
-import { useState } from "react";
-import Footer from "../Footer";
 
 function Nav({stationsList} : any) {
   return (
@@ -13,13 +10,14 @@ function Nav({stationsList} : any) {
           <h1>
             <Link to="/">
               <span role="img" aria-label="Back2Better Logo - metro car emoji">🚇Back2Better</span>
+              {/*<h6>Using <a href="https://dcmetrohero.com/apis">MetroHero API</a></h6>*/}
             </Link>
           </h1>
             {stationsList.map(station => (
               <>
                 <li key = {station.name}>
-                <span className="station-circle" style={{'background-color' : `${station.name}`}}></span>
                   <Link to={`/${station.name}`} >
+                  <span className="station-circle" style={{'backgroundColor' : `${station.name}`}}></span>
                     {station.display}
                   </Link>
                 </li>
