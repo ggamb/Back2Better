@@ -2,7 +2,18 @@ import { useEffect, useState } from "react";
 import Modal from '@mui/material/Modal';
 import StationTimes from "../StationTimes";
 
+
 function Red() {
+
+    const apiKey = process.env.REACT_APP_METROHERO;
+
+    const metroHeroTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
+
+    const requestHeaders: any = new Headers();
+    requestHeaders.set('Content-Type', 'application/json');
+    requestHeaders.set('Access-Control-Allow-Origin', '*');
+    requestHeaders.set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, X-Requested-With');
+    requestHeaders.set('apiKey', apiKey);
 
     interface Station {
         line: string;
@@ -63,26 +74,18 @@ function Red() {
     const [northBoundTrains, setNorthBoundTrains] = useState<RedTrains[]>([]);
     const [southBoundTrains, setSouthBoundTrains] = useState<RedTrains[]>([]);
 
-    const apiKey = process.env.REACT_APP_METROHERO;
-    const metroHeroRedTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
-    
-
-    const requestHeaders: any = new Headers();
-    requestHeaders.set('Content-Type', 'application/json');
-    requestHeaders.set('Access-Control-Allow-Origin', '*');
-    requestHeaders.set('Access-Control-Allow-Headers', 'Content-Type, Access-Control-Allow-Headers, X-Requested-With');
-    requestHeaders.set('apiKey', apiKey);
-
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
 
-    const[stationTimes, setStationTimes] = useState([]);
+    const [stationTimes, setStationTimes] = useState([]);
+
+    const [clickedStation, setClickedStation] = useState('');
 
 
     async function getRedLineTrains() {
         try {
-            let response : any = await fetch(metroHeroRedTrains, {
+            let response : any = await fetch(metroHeroTrains, {
                 headers:  requestHeaders
             });
 
@@ -140,7 +143,11 @@ function Red() {
 
             let calledStationTime : any = await response.json();
 
-            setStationTimes(calledStationTime)
+            console.log(calledStationTime);
+
+            setStationTimes(calledStationTime);
+
+            setClickedStation(calledStationTime[0].LocationName);
 
             //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
             //console.log('station time', calledStationTime)
@@ -149,7 +156,7 @@ function Red() {
             console.log(err)
         }
     }
-    
+
     return (
         <>
         <div className="scrollable-container">
@@ -161,15 +168,15 @@ function Red() {
                                 <>
                                 <div className="station-row">
                                     <div className="station-dot" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}></div>
-                                    <Modal
-                                        open={open}
-                                        onClose={handleClose}
-                                    >
-                                        <StationTimes
-                                            stationTime = {stationTimes}
-                                        />
-
-                                    </Modal>
+                                        <Modal
+                                            open={open}
+                                            onClose={handleClose}
+                                        >
+                                            <StationTimes
+                                                stationTime = {stationTimes}
+                                                clickedStation = {clickedStation}
+                                            />
+                                        </Modal>
                                     {/*Maps southbound trains at stations*/}
                                         {southBoundTrainsAtStation.length ?
                                             (
@@ -222,7 +229,7 @@ function Red() {
                                                 <></>
                                             )
                                         }
-                                    <div className="station-name">{station.name}</div>
+                                    <div className="station-name" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}>{station.name}</div>
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
@@ -299,28 +306,6 @@ function Red() {
                 </div>    
             </div>
         </div>
-
-        {/*<div className="northBound"></div>
-        
-        <div className= "vertical-red">
-
-        </div>
-        <div className="southBound"></div>
-        <div>
-            <ul>
-                {redLineStations.map(station => (
-                    <p className="station-list-red">{station.name}</p>
-                ))
-                <li class="station-name">
-                    <p>{{station.name}}</p>
-                    <div *ngIf="station.transferLines.includes('green')">🟢</div>
-                    <div *ngIf="station.transferLines.includes('yellow')">🟡</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🟠</div>
-                    <div *ngIf="station.transferLines.includes('silver')">⚪</div>
-                    <div *ngIf="station.transferLines.includes('blue')">🔵</div>
-                </li>
-            </ul>
-        </div>*/}
         </>
     )
 }

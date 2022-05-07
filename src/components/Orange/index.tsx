@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-
+import Modal from '@mui/material/Modal';
+import StationTimes from "../StationTimes";
 
 function Orange() {
     interface Station {
@@ -32,11 +33,6 @@ function Orange() {
         {line: 'orange', name: 'Cheverly', transfer: false, transferLines: '', stationCode: 'D11'},
         {line: 'orange', name: 'Deanwood', transfer: false, transferLines: '', stationCode: 'D10'},
         {line: 'orange', name: 'Minnesota Ave', transfer: false, transferLines: '', stationCode: 'D09'},
-        {line: 'blue silver', name: 'Largo Town Center', transfer: false, transferLines: '', stationCode: 'G05'},
-        {line: 'blue silver', name: 'Morgan Blvd', transfer: false, transferLines: '', stationCode: 'G04'},
-        {line: 'blue silver', name: 'Addison Road', transfer: false, transferLines: '', stationCode: 'G03'},
-        {line: 'blue silver', name: 'Capitol Heights', transfer: false, transferLines: '', stationCode: 'G02'},
-        {line: 'blue silver', name: 'Benning Road', transfer: false, transferLines: '', stationCode: 'G01'},
         {line: 'blue silver orange', name: 'Stadium-Armory', transfer: false, transferLines: 'orange silver blue', stationCode: 'D08'},
         {line: 'blue silver orange', name: 'Potomac Avenue', transfer: false, transferLines: '', stationCode: 'D07'},
         {line: 'blue silver orange', name: 'Eastern Market', transfer: false, transferLines: '', stationCode: 'D06'},
@@ -65,6 +61,14 @@ function Orange() {
     const [westBoundTrainsAtStation, setWestBoundTrainsAtStation] = useState<OrangeTrains[]>([]);
     const [eastBoundTrains, setEastBoundTrains] = useState<OrangeTrains[]>([]);
     const [westBoundTrains, setWestBoundTrains] = useState<OrangeTrains[]>([]);
+
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [stationTimes, setStationTimes] = useState([]);
+
+    const [clickedStation, setClickedStation] = useState('');
 
     const apiKey = process.env.REACT_APP_METROHERO;
     const metroHeroOrangeTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
@@ -116,12 +120,12 @@ function Orange() {
 
     }, []);
 
-    async function showStationTimes (e : any){
+    async function showStationTimes(e : any){
         e.preventDefault();
 
-        console.log(e.target.id)
+        let stationCode = e.target.id;
 
-        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${e.target.id}/trains`;
+        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${stationCode}/trains`;
 
         try {
             let response : any = await fetch(metroHeroStationTimes, {
@@ -132,11 +136,16 @@ function Orange() {
                 throw new Error('API failure');
             }
 
-            let stationTime : any = await response.json();
+            let calledStationTime : any = await response.json();
+
+            console.log(calledStationTime);
+
+            setStationTimes(calledStationTime);
+
+            setClickedStation(calledStationTime[0].LocationName);
 
             //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
-            console.log('station time', stationTime)
-
+            //console.log('station time', calledStationTime)
 
         }  catch (err) {
             console.log(err)
@@ -154,7 +163,16 @@ function Orange() {
                             {orangeLineStations.map(station => (
                                 <>
                                 <div className="station-row">
-                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {showStationTimes}></div>
+                                <div className="station-dot" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}></div>
+                                        <Modal
+                                            open={open}
+                                            onClose={handleClose}
+                                        >
+                                            <StationTimes
+                                                stationTime = {stationTimes}
+                                                clickedStation = {clickedStation}
+                                            />
+                                        </Modal>
                                     {/*Maps westbound trains at stations*/}
                                         {westBoundTrainsAtStation.length ?
                                             (
@@ -207,7 +225,7 @@ function Orange() {
                                                 <></>
                                             )
                                         }
-                                    <div className="station-name">{station.name}</div>
+                                    <div className="station-name" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}>{station.name}</div>
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
@@ -284,28 +302,6 @@ function Orange() {
                 </div>    
             </div>
         </div>
-
-        {/*<div className="eastBound"></div>
-        
-        <div className= "vertical-orange">
-
-        </div>
-        <div className="westBound"></div>
-        <div>
-            <ul>
-                {orangeLineStations.map(station => (
-                    <p className="station-list-orange">{station.name}</p>
-                ))
-                <li class="station-name">
-                    <p>{{station.name}}</p>
-                    <div *ngIf="station.transferLines.includes('green')">🟢</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🟡</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🟠</div>
-                    <div *ngIf="station.transferLines.includes('silver')">⚪</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🔵</div>
-                </li>
-            </ul>
-        </div>*/}
         </>
     )
 }

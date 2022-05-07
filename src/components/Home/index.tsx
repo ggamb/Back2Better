@@ -5,6 +5,7 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
+import {toMinutes} from '../../utils/toMinutes'
 
 function Home() {
     
@@ -64,22 +65,6 @@ function Home() {
         }
     }
 
-    const toMinutes = (time : number) => {   
-        // Hours, minutes and seconds
-        var hrs = ~~(time / 3600);
-        var mins = ~~((time % 3600) / 60);
-        var secs = ~~time % 60;
-    
-        // Output like "1:01" or "4:03:59" or "123:03:59"
-        var ret = "";
-        if (hrs > 0) {
-            ret += "" + hrs + ":" + (mins < 10 ? "0" : "");
-        }
-        ret += "" + mins + ":" + (secs < 10 ? "0" : "");
-        ret += "" + secs;
-        return ret;
-    }
-
     useEffect(() => {
         getHomeInfo();
     }, []);
@@ -98,7 +83,7 @@ function Home() {
                                 <>
                                 <CardContent>
                                         <Typography sx={{ fontSize: 30 }} className = {line.lineCode} gutterBottom>
-                                            {line.lineCode}
+                                            <Link className = {line.lineCode} style={{'textDecoration' : 'none'}} to={line.lineCode}>{line.lineCode}</Link>
                                         </Typography>
                                         <Typography variant="h6" component="div">
                                             Line status: 

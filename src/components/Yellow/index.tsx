@@ -1,4 +1,6 @@
 import { useEffect, useState } from "react";
+import Modal from '@mui/material/Modal';
+import StationTimes from "../StationTimes";
 
 function Yellow() {
     interface Station {
@@ -55,6 +57,14 @@ function Yellow() {
     const [northBoundTrains, setNorthBoundTrains] = useState<YellowTrains[]>([]);
     const [southBoundTrains, setSouthBoundTrains] = useState<YellowTrains[]>([]);
 
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [stationTimes, setStationTimes] = useState([]);
+
+    const [clickedStation, setClickedStation] = useState('');
+
     const apiKey = process.env.REACT_APP_METROHERO;
     const metroHeroYellowTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
 
@@ -105,12 +115,12 @@ function Yellow() {
 
     }, []);
 
-    async function showStationTimes (e : any){
+    async function showStationTimes(e : any){
         e.preventDefault();
 
-        console.log(e.target.id)
+        let stationCode = e.target.id;
 
-        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${e.target.id}/trains`;
+        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${stationCode}/trains`;
 
         try {
             let response : any = await fetch(metroHeroStationTimes, {
@@ -121,11 +131,13 @@ function Yellow() {
                 throw new Error('API failure');
             }
 
-            let stationTime : any = await response.json();
+            let calledStationTime : any = await response.json();
 
-            //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
-            console.log('station time', stationTime)
+            console.log(calledStationTime);
 
+            setStationTimes(calledStationTime);
+
+            setClickedStation(calledStationTime[0].LocationName);
 
         }  catch (err) {
             console.log(err)
@@ -143,7 +155,16 @@ function Yellow() {
                             {yellowLineStations.map(station => (
                                 <>
                                 <div className="station-row">
-                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {showStationTimes}></div>
+                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}></div>
+                                        <Modal
+                                            open={open}
+                                            onClose={handleClose}
+                                        >
+                                            <StationTimes
+                                                stationTime = {stationTimes}
+                                                clickedStation = {clickedStation}
+                                            />
+                                        </Modal>
                                     {/*Maps southbound trains at stations*/}
                                         {southBoundTrainsAtStation.length ?
                                             (
@@ -196,7 +217,7 @@ function Yellow() {
                                                 <></>
                                             )
                                         }
-                                    <div className="station-name">{station.name}</div>
+                                    <div className="station-name" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}>{station.name}</div>
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
@@ -273,28 +294,6 @@ function Yellow() {
                 </div>    
             </div>
         </div>
-
-        {/*<div className="northBound"></div>
-        
-        <div className= "vertical-yellow">
-
-        </div>
-        <div className="southBound"></div>
-        <div>
-            <ul>
-                {yellowLineStations.map(station => (
-                    <p className="station-list-yellow">{station.name}</p>
-                ))
-                <li class="station-name">
-                    <p>{{station.name}}</p>
-                    <div *ngIf="station.transferLines.includes('green')">🟢</div>
-                    <div *ngIf="station.transferLines.includes('yellow')">🟡</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🟠</div>
-                    <div *ngIf="station.transferLines.includes('silver')">⚪</div>
-                    <div *ngIf="station.transferLines.includes('blue')">🔵</div>
-                </li>
-            </ul>
-        </div>*/}
         </>
     )
 }

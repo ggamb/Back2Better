@@ -1,4 +1,7 @@
 import { useEffect, useState } from "react";
+import Modal from '@mui/material/Modal';
+import StationTimes from "../StationTimes";
+
 
 function Blue() {
     interface Station {
@@ -61,6 +64,14 @@ function Blue() {
     const [eastBoundTrains, setEastBoundTrains] = useState<BlueTrains[]>([]);
     const [westBoundTrains, setWestBoundTrains] = useState<BlueTrains[]>([]);
 
+    const [open, setOpen] = useState(false);
+    const handleOpen = () => setOpen(true);
+    const handleClose = () => setOpen(false);
+
+    const [stationTimes, setStationTimes] = useState([]);
+
+    const [clickedStation, setClickedStation] = useState('');
+
     const apiKey = process.env.REACT_APP_METROHERO;
     const metroHeroBlueTrains = `https://dcmetrohero.com/api/v1/metrorail/trains`;
 
@@ -111,12 +122,12 @@ function Blue() {
 
     }, []);
 
-    async function showStationTimes (e : any){
+    async function showStationTimes(e : any){
         e.preventDefault();
 
-        console.log(e.target.id)
+        let stationCode = e.target.id;
 
-        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${e.target.id}/trains`;
+        const metroHeroStationTimes = `https://dcmetrohero.com/api/v1/metrorail/stations/${stationCode}/trains`;
 
         try {
             let response : any = await fetch(metroHeroStationTimes, {
@@ -127,16 +138,22 @@ function Blue() {
                 throw new Error('API failure');
             }
 
-            let stationTime : any = await response.json();
+            let calledStationTime : any = await response.json();
+
+            console.log(calledStationTime);
+
+            setStationTimes(calledStationTime);
+
+            setClickedStation(calledStationTime[0].LocationName);
 
             //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
-            console.log('station time', stationTime)
-
+            //console.log('station time', calledStationTime)
 
         }  catch (err) {
             console.log(err)
         }
     }
+
     
 
     return (
@@ -149,7 +166,16 @@ function Blue() {
                             {blueLineStations.map(station => (
                                 <>
                                 <div className="station-row">
-                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {showStationTimes}></div>
+                                    <div className="station-dot" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}></div>
+                                        <Modal
+                                            open={open}
+                                            onClose={handleClose}
+                                        >
+                                            <StationTimes
+                                                stationTime = {stationTimes}
+                                                clickedStation = {clickedStation}
+                                            />
+                                        </Modal>
                                     {/*Maps westbound trains at stations*/}
                                         {westBoundTrainsAtStation.length ?
                                             (
@@ -202,7 +228,7 @@ function Blue() {
                                                 <></>
                                             )
                                         }
-                                    <div className="station-name">{station.name}</div>
+                                    <div className="station-name" id={`${station.stationCode}`} onClick= {(e) => {handleOpen(); showStationTimes(e)}}>{station.name}</div>
                                     <div className="station-problems"></div>
                                 </div>
                                 <div className="between-station on-left">
@@ -279,28 +305,6 @@ function Blue() {
                 </div>    
             </div>
         </div>
-
-        {/*<div className="eastBound"></div>
-        
-        <div className= "vertical-blue">
-
-        </div>
-        <div className="westBound"></div>
-        <div>
-            <ul>
-                {blueLineStations.map(station => (
-                    <p className="station-list-blue">{station.name}</p>
-                ))
-                <li class="station-name">
-                    <p>{{station.name}}</p>
-                    <div *ngIf="station.transferLines.includes('green')">🟢</div>
-                    <div *ngIf="station.transferLines.includes('blue')">🟡</div>
-                    <div *ngIf="station.transferLines.includes('orange')">🟠</div>
-                    <div *ngIf="station.transferLines.includes('silver')">⚪</div>
-                    <div *ngIf="station.transferLines.includes('blue')">🔵</div>
-                </li>
-            </ul>
-        </div>*/}
         </>
     )
 }

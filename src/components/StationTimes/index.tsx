@@ -2,9 +2,7 @@ import React from 'react';
 import Box from '@mui/material/Box';
 
 
-function StationTimes({stationTime}) {
-
-    //console.log(stationTime)
+function StationTimes({stationTime, clickedStation}) {
 
     const apiKey = process.env.REACT_APP_METROHERO;
     const requestHeaders: any = new Headers();
@@ -19,20 +17,18 @@ function StationTimes({stationTime}) {
         top: '50%',
         left: '50%',
         transform: 'translate(-50%, -50%)',
-        width: '50%',
-        bgcolor: 'silver',
+        width: '100%',
+        bgcolor: 'transparent',
         border: '2px solid #000',
-        boxShadow: 24
+        boxShadow: 24,
     };
 
     return (
         <>
         <Box sx = {style}>
-            <table>
-                {/*<div>
-                    Station times for {stationTime[0].LocationName}
-                </div>*/}
-                <tr style={{'width' : '20%'}}>
+            <h3 style={{'textAlign' : 'center', 'color' : 'red'}}>Station times for {clickedStation}</h3>
+            <table style={{ 'margin' : '0 auto'}}>
+                <tr style={{'width' : '20%', 'color' : 'red', 'fontWeight' : 'bold'}}>
                     <th>LN</th>
                     <th>CAR</th>
                     <th>DEST</th>
@@ -41,10 +37,10 @@ function StationTimes({stationTime}) {
                     {stationTime.map((stationLine) : any => (
                         <tr>
                             <>
-                                <td key={stationLine.trainId} style={{'width' : '20%', 'textAlign': 'center'}}>{stationLine.Line}</td>
-                                <td style={{'width' : '20%', 'textAlign': 'center'}}>{stationLine.Car}</td>
-                                <td style={{'width' : '20%', 'textAlign': 'center'}}>{stationLine.DestinationName}</td>
-                                <td style={{'width' : '20%', 'textAlign': 'center'}}>{stationLine.Min}</td>
+                                <td key={stationLine.trainId} className='station-time-display'>{stationLine.Line}</td>
+                                <td className='station-time-display'>{stationLine.Car}</td>
+                                <td className='station-time-display'>{stationLine.DestinationName}</td>
+                                <td className='station-time-display'>{stationLine.Min}</td>
                             </>
                         </tr>
                     ))}
