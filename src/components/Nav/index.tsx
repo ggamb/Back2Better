@@ -1,7 +1,22 @@
 
 import { Link } from "react-router-dom";
+import { useEffect} from "react";
 
 function Nav({stationsList} : any) {
+
+  useEffect(() => {
+    window.addEventListener('scroll', isSticky);
+    return () => {
+        window.removeEventListener('scroll', isSticky);
+    };
+  });
+
+  const isSticky = (e) => {
+    const header : any = document.querySelector('header');
+    const scrollTop = window.scrollY;
+    scrollTop >= 100 ? header.classList.add('is-sticky') : header.classList.remove('is-sticky');
+  };
+  
   return (
     <>
     <header>
