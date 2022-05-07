@@ -5,7 +5,6 @@ import CardActions from '@mui/material/CardActions';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import Hamburger from '../Hamburger'
 
 function Home() {
     
@@ -47,7 +46,7 @@ function Home() {
 
             let lineData : any = lineDataComplete.lineMetricsByLine;
 
-            let lineArray = [];          
+            let lineArray : any[] = [];          
 
             for(let [key, value] of Object.entries(lineData)) {
 

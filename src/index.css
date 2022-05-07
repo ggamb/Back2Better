@@ -263,6 +263,7 @@ footer {
   text-align: right;
   max-width: 110px;
   float: right;
+  cursor: pointer;
 }
 
 .between-station {
