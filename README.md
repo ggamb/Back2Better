@@ -1,4 +1,4 @@
-# Back2BetterReact
+# Back2Better
 
 ## Table of Contents
 * [Description](#description)
