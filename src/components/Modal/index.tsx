@@ -39,23 +39,23 @@ export default function BasicModal({stationTime}) {
                         </tr>
                         <tr>
                             {stationTime.map((stationLine) : any => (
-                                <td key={stationLine.trainId}>{stationLine.Line}</td>
+                                <td key={stationLine.realTrainId}>{stationLine.Line}</td>
                             ))}
                         </tr>
                         <tr>
                             {stationTime.map((stationCar) : any => (
-                                <td key={stationCar.trainId}>{stationCar.Car}</td>
+                                <td key={stationCar.realTrainId}>{stationCar.Car}</td>
                             ))}
                         </tr>
                         <tr>
                             {stationTime.map((stationDestination) : any => (
-                                <td key={stationDestination.trainId}>{stationDestination.DestinationName}</td>
+                                <td key={stationDestination.realTrainId}>{stationDestination.DestinationName}</td>
                             ))}
 
                         </tr>
                         <tr>
                             {stationTime.map((stationMin) : any=> (
-                                <td key={stationMin.trainId}>{stationMin.Min}</td>
+                                <td key={stationMin.realTrainId}>{stationMin.Min}</td>
                             ))}
                         </tr>
                     </table>

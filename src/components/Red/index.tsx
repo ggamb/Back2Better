@@ -34,7 +34,7 @@ function Red() {
         directionNumber: number;
         minutesAway: number;
         tripId: string;
-        trainId: string;
+        realTrainId: string;
         isCurrentlyHoldingOrSlow: boolean;
         Min: string;
     }
@@ -95,8 +95,8 @@ function Red() {
 
             let redLineTrains : any = await response.json();
 
-            //let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
-            //console.log('all RD', redLineConsole)
+            let redLineConsole : any = redLineTrains.filter((lines : any) => lines.Line === 'RD');
+            console.log('all RD', redLineConsole)
 
             let redLineNorth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 1 && lines.minutesAway > 0);
             let redLineSouth : any = redLineTrains.filter((lines : any) => lines.Line === 'RD' && lines.directionNumber === 2 && lines.minutesAway > 0);
@@ -189,9 +189,9 @@ function Red() {
                                                                     <div className="train-info-left">
                                                                         <p className="train-category">{southTrains.Min}</p>
                                                                         <p>{southTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {southTrains.realTrainId}</p>
                                                                     </div>
-                                                                    <div key={southTrains.trainId} className="train-at-station">🚇↓</div>
+                                                                    <div key={southTrains.realTrainId} className="train-at-station">🚇↓</div>
                                                                 </div>
                                                             )
                                                         })
@@ -211,12 +211,12 @@ function Red() {
                                                             if(northTrains.currentStationName === station.name) 
                                                             return ( 
                                                                 <>
-                                                                <div key={northTrains.trainId} className="train-at-station-right">🚇↑</div>
+                                                                <div key={northTrains.realTrainId} className="train-at-station-right">🚇↑</div>
                                                                 <div className="train-icon-container-right"> 
                                                                     <div className="train-info-right">
                                                                         <p className="train-category">{northTrains.Min}</p>
                                                                         <p>{northTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {northTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {northTrains.realTrainId}</p>
                                                                     </div>
                                                                 </div>
                                                                 </>
@@ -251,9 +251,9 @@ function Red() {
                                                                             )
                                                                         }
                                                                         <p>{southTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {southTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {southTrains.realTrainId}</p>
                                                                     </div>
-                                                                    <div key={southTrains.trainId} className="train-in-transit-left">🚇↓</div>
+                                                                    <div key={southTrains.realTrainId} className="train-in-transit-left">🚇↓</div>
                                                                 </div>
                                                             </>
                                                         )
@@ -277,7 +277,7 @@ function Red() {
                                                         return( 
                                                             <>
                                                                 <div className="train-icon-container-right-transit">
-                                                                    <div key={northTrains.trainId} className="train-in-transit-right">🚇↑</div>
+                                                                    <div key={northTrains.realTrainId} className="train-in-transit-right">🚇↑</div>
                                                                     <div className="train-info-right">
                                                                         {northTrains.Min === 'ARR' || northTrains.Min === 'BRD' ? (
                                                                                 <p className="train-category">{northTrains.Min}</p>
@@ -286,7 +286,7 @@ function Red() {
                                                                             )
                                                                         }
                                                                         <p>{northTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {northTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {northTrains.realTrainId}</p>
                                                                     </div>
                                                                 </div>
                                                             </>

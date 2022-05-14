@@ -37,7 +37,7 @@ function StationTimes({stationTime, clickedStation}) {
                     {stationTime.map((stationLine) : any => (
                         <tr>
                             <>
-                                <td key={stationLine.trainId} className='station-time-display'>{stationLine.Line}</td>
+                                <td key={stationLine.realTrainId} className='station-time-display'>{stationLine.Line}</td>
                                 <td className='station-time-display'>{stationLine.Car}</td>
                                 <td className='station-time-display'>{stationLine.DestinationName}</td>
                                 <td className='station-time-display'>{stationLine.Min}</td>

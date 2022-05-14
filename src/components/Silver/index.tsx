@@ -23,7 +23,7 @@ function Silver() {
         directionNumber: number;
         minutesAway: number;
         tripId: string;
-        trainId: string;
+        realTrainId: string;
         isCurrentlyHoldingOrSlow: boolean;
         Min: string;
     }
@@ -186,9 +186,9 @@ function Silver() {
                                                                     <div className="train-info-left">
                                                                         <p className="train-category">{westTrains.Min}</p>
                                                                         <p>{westTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {westTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {westTrains.realTrainId}</p>
                                                                     </div>
-                                                                    <div key={westTrains.trainId} className="train-at-station">🚇↓</div>
+                                                                    <div key={westTrains.realTrainId} className="train-at-station">🚇↓</div>
                                                                 </div>
                                                             )
                                                         })
@@ -208,12 +208,12 @@ function Silver() {
                                                             if(eastTrains.currentStationName === station.name) 
                                                             return ( 
                                                                 <>
-                                                                <div key={eastTrains.trainId} className="train-at-station-right">🚇↑</div>
+                                                                <div key={eastTrains.realTrainId} className="train-at-station-right">🚇↑</div>
                                                                 <div className="train-icon-container-right"> 
                                                                     <div className="train-info-right">
                                                                         <p className="train-category">{eastTrains.Min}</p>
                                                                         <p>{eastTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {eastTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {eastTrains.realTrainId}</p>
                                                                     </div>
                                                                 </div>
                                                                 </>
@@ -248,9 +248,9 @@ function Silver() {
                                                                             )
                                                                         }
                                                                         <p>{westTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {westTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {westTrains.realTrainId}</p>
                                                                     </div>
-                                                                    <div key={westTrains.trainId} className="train-in-transit-left">🚇↓</div>
+                                                                    <div key={westTrains.realTrainId} className="train-in-transit-left">🚇↓</div>
                                                                 </div>
                                                             </>
                                                         )
@@ -274,7 +274,7 @@ function Silver() {
                                                         return( 
                                                             <>
                                                                 <div className="train-icon-container-right-transit">
-                                                                    <div key={eastTrains.trainId} className="train-in-transit-right">🚇↑</div>
+                                                                    <div key={eastTrains.realTrainId} className="train-in-transit-right">🚇↑</div>
                                                                     <div className="train-info-right">
                                                                         {eastTrains.Min === 'ARR' || eastTrains.Min === 'BRD' ? (
                                                                                 <p className="train-category">{eastTrains.Min}</p>
@@ -283,7 +283,7 @@ function Silver() {
                                                                             )
                                                                         }
                                                                         <p>{eastTrains.Car}-car train</p>
-                                                                        <p className="train-Id">Train {eastTrains.trainId}</p>
+                                                                        <p className="train-Id">Train {eastTrains.realTrainId}</p>
                                                                     </div>
                                                                 </div>
                                                             </>
